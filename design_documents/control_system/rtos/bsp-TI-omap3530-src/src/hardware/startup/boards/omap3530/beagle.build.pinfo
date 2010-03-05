@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/boot/build/
+INSTALLNAME=omap3530.beagle.build
+NAME=beagle.build
+USER=davychiu
+HOST=davy-computer
+DATE=2010/03/04-09:07:30-GMT
+DESCRIPTION=Example build file for startup-omap3530

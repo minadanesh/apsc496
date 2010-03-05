@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/bin/
+INSTALLNAME=gpio
+NAME=gpio
+USER=davychiu
+HOST=davy-computer
+DATE=2010/03/04-07:47:06-GMT
+DESCRIPTION=Utility to control LED D440

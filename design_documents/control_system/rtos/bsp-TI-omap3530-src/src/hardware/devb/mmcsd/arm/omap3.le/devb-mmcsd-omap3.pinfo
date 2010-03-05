@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/sbin/
+INSTALLNAME=devb-mmcsd-omap3
+NAME=devb-mmcsd-omap3
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:27:59-GMT
+DESCRIPTION=mmc/sd disk driver

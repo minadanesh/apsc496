@@ -1,0 +1,25 @@
+OMAP35xx GPIO utility
+
+%C [options]
+
+Options:
+-m gpio_module  The GPIO module. Can be a value from 1 to 6
+-p pin          The GPIO pin you want to set
+-d direction    The direction of the GPIO pin. Can be: read|write
+-c command      Action to perform. Can be: set|reset|read
+-v              verbose
+
+Examples:
+Set GPIO pin 26 on GPIO1
+gpio -m 1 -p 26 -d write -c set
+
+Reset GPIO pin 26 on GPIO1
+gpio -m 1 -p 26 -d write -c reset
+
+Read GPIO pin 26 on GPIO1 where GPIO pin is in output direction
+gpio -m 1 -p 26 -d write -c read
+
+Read GPIO pin 26 on GPIO1 where GPIO pin is in input direction
+gpio -m 1 -p 26 -d read -c read
+
+See page 3460 of SPRUF98D–October 2009

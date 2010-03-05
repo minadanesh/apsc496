@@ -1,0 +1,1150 @@
+###########################################################################
+##
+## QNX Neutrino 6.4.1 on the Texas Instruments OMAP 3530 Board
+##
+###########################################################################
+##
+## SUPPORTED DEVICES:
+##
+## SERIAL:   OMAP UART
+## I2C:      Inter-Integrated Circuit Bus
+## MMC/SD:   MultMediaCard/Secure Digital  
+## USB OTG:   USB OTG Host Controller driver
+## USB EHCI Host: USB EHCI Host Controller driver
+## NAND:     ETFS Micron NAND
+## AUDIO:    Audio Codec on TWL4030
+## GRAPHICS: OMAP3530 output HDMI
+## WIFI:  SDIO WIFI  
+## SGX:  Experimental support for SGX GPU requires tools patch 
+##
+##  - For detailed instructions on the default example configuration for
+##    these devices see the "CONFIGURING ON-BOARD SUPPORTED HARDWARE"
+##    section below the build script section, or refer to the BSP docs.
+##  - Tip: Each sub-section which relates to a particular device is marked
+##         with its tag (ex. SERIAL). You can use the search features of
+##         your editor to quickly find and add or remove support for
+##         these devices.
+##  - For details on how build files work, please refer to the help
+##    documentation for "mkifs" in the QNX Neutrino "Utilities Reference".
+## 
+###########################################################################
+##
+## NOTES:
+##
+###########################################################################
+
+###########################################################################
+## START OF BUILD SCRIPT
+###########################################################################
+
+[image=0x80100000]
+[+compress]
+
+# For loading with the QNX IPL, uncomment below
+# [virtual=armle,binary] .bootstrap = {
+
+# For loading IFS images with the U-Boot
+[virtual=armle,raw] .bootstrap = {
+	# Startup for Dsplink config 2M
+	startup-omap3530 -L 0x87E00000,0x200000 -v -p -D8250.0x49020000^2.0.48000000.16
+	
+	#######################################################################
+	## PATH set here is the *safe* path for executables.
+	## LD_LIBRARY_PATH set here is the *safe* path for libraries.
+	##     i.e. These are the paths searched by setuid/setgid binaries.
+	##          (confstr(_CS_PATH...) and confstr(_CS_LIBPATH...))
+	#######################################################################
+	PATH=:/proc/boot:/bin:/usr/bin LD_LIBRARY_PATH=:/proc/boot:/lib:/usr/lib:/lib/dll procnto-v6-instr -v
+}
+[+script] .script = {
+	# Initialise the console
+	procmgr_symlink ../../proc/boot/libc.so.3 /usr/lib/ldqnx.so.2
+
+	display_msg Welcome to QNX Neutrino 6.4.1 on the Texas Instruments OMAP3530 (ARMv7 Cortex-A8 core) - Beagle Board
+
+	# Seed hardware resources into the Resource database manager 
+	resource_seed
+	
+	#######################################################################
+	## SERIAL driver
+	#######################################################################
+	devc-seromap -e -F -b115200 -c48000000/16 0x49020000^2,74
+	waitfor /dev/ser1 4
+	reopen /dev/ser1
+
+   	# Start some common servers
+   	slogger &
+   	pipe &
+
+	#######################################################################
+	## I2C driver
+	##  - Required for both USB and AUDIO
+	#######################################################################
+	display_msg starting I2C driver...
+	
+	i2c-omap35xx
+	waitfor /dev/i2c0
+
+	#######################################################################
+	## PMIC(TW4030) power management support utility
+    	##  - It requires I2C driver 
+    	#######################################################################
+    	display_msg Configure power management chip 
+    	pmic_tw4030_cfg
+    
+	#######################################################################
+	## NAND_ETFS driver
+	##
+	## Provide proper "-r" value for reserveing the bootloader area on your board 
+	##    -r kbytes              Set size of raw partition /dev/etfs1. Default: 0.
+	## Only when starting the driver for the first time,
+	##    use "-e" option to erase and create the ETFS filesystem
+	#######################################################################
+	display_msg Starting etfs driver...
+	#fs-etfs-omap3530_micron -r65536 -e -m /fs/etfs
+	fs-etfs-omap3530_micron -r65536 -m /fs/etfs
+
+	#######################################################################
+	## AUDIO driver
+	##  - Requires the I2C driver to be enabled
+	#######################################################################
+	display_msg Starting audio driver...
+	#
+	io-audio -domap35xx-twl4030
+	waitfor /dev/snd/pcmC0D1p
+
+	#######################################################################
+	## USB OTG Host Controller driver and USB EHCI Host Controller driver
+	#######################################################################
+	display_msg Starting USB EHCI Host and OTG host driver...
+	
+	io-usb -dehci-omap3 ioport=0x48064800,irq=77  -domap3530-mg ioport=0x480ab000,irq=92
+	waitfor /dev/io-usb/io-usb 4
+
+	#######################################################################
+	## MMC/SD driver
+	#######################################################################
+	display_msg Starting MMC/SD driver...
+	devb-mmcsd-omap3 cam quiet blk cache=2m
+
+	#######################################################################
+	## GRAPHICS driver
+	#######################################################################
+	 display_msg Starting Graphics driver... 
+	 io-display  -dvid=0,did=0
+	 waitfor /dev/io-display 10
+
+	#######################################################################
+   	## SGX GPU driver
+	## Note:  the Composition_Manager patch should be install first
+   	#######################################################################
+ 	#display_msg Starting SGX GPU driver... 
+   	#GRAPHICS_ROOT=/usr/lib/graphics/omap3530
+   	#/usr/lib/graphics/devg/pvrsrvd
+
+
+	#######################################################################
+	## WIFI start ram filesystem 
+	#######################################################################
+	#devb-ram ram capacity=16384,nodinit,cache=0m
+	#waitfor /dev/hd0
+	#fdisk /dev/hd0 add -t 6
+	#mount -e /dev/hd0
+	#mkdosfs /dev/hd0t6
+	#mount -t dos /dev/hd0t6 /fsram
+	
+	####################
+	## Network startup
+	####################
+	display_msg Starting Network driver...
+	sleep 5
+	io-pkt-v4 -d rtl8150 -p tcpip
+	waitfor /dev/io-net/en0
+	dhcp.client
+	qconn
+	#inetd
+	#ftpd
+	##remote debug##
+	devc-pty
+	
+	mount -t flash /dev/hd0 /mnt/sd
+	
+	#######################################################################
+	## SDIO WIFI driver
+	## Note: please insert SDIO WIFI card. and then run ". ./root/wifi.sh"  
+	#######################################################################
+	
+	#######################################################################
+	## These env variables are inherited by all the programs which follow
+	#######################################################################
+	SYSNAME=nto
+	TERM=qansi
+	HOME=/
+	PATH=:/proc/boot:/bin:/usr/bin:/opt/bin
+	LD_LIBRARY_PATH=:/proc/boot:/lib:/usr/lib:/lib/dll:/opt/lib
+
+	[+session] sh &
+}
+
+# Redirect console messages
+[type=link] /bin/sh=/proc/boot/ksh
+[type=link] /dev/console=/dev/ser1
+[type=link] /tmp=/dev/shmem
+
+# Programs require the runtime linker (ldqnx.so) to be at a fixed location
+
+# Shared libraries
+libc.so
+libc.so.3
+libcpp.so
+libcpp.so.4
+
+###########################################################################
+## uncomment for legacy binary support (Momentics 6.3.2 and earlier)  
+###########################################################################
+libc.so.2
+
+## Block device
+libcam.so
+io-blk.so
+cam-disk.so
+fs-qnx4.so
+fs-dos.so
+
+###########################################################################
+## uncomment for USB driver
+###########################################################################
+libusbdi.so
+devu-omap3530-mg.so
+devu-ehci-omap3.so
+
+###########################################################################
+## uncomment for graphics driver
+###########################################################################
+devg-omap35xx.so
+libGLES_CL.so
+libffb.so
+libgf.so
+devg-soft3d-fixed.so
+libFF-T2K.so.2
+
+###########################################################################
+## uncomment for AUDIO driver
+###########################################################################
+deva-ctrl-omap35xx-twl4030.so
+libasound.so.2
+
+###########################################################################
+## uncomment for network driver
+###########################################################################
+devn-asix.so
+devn-pegasus.so                       
+devn-rtl8150.so                       
+devnp-shim.so 
+
+###########################################################################
+## uncomment for WIFI driver
+###########################################################################
+devnp-mv8686.so
+libcrypto.so.1
+libssl.so.1
+libsdio.so.1
+libsocket.so.2
+libcam.so.2
+libm.so.2
+libz.so.2
+
+# Executables
+[data=c]
+devc-seromap
+
+###########################################################################
+## uncomment for ETFS driver
+###########################################################################
+fs-etfs-omap3530_micron
+etfsctl
+
+###########################################################################
+## uncomment for SD driver
+###########################################################################
+devb-mmcsd-omap3
+
+###########################################################################
+## uncomment for USB driver
+###########################################################################
+io-usb
+usb
+devb-umass
+
+###########################################################################
+## uncomment for I2C driver
+###########################################################################
+i2c-omap35xx
+
+###########################################################################
+## Power management utility
+###########################################################################
+pmic_tw4030_cfg
+
+###########################################################################
+## uncomment for AUDIO driver
+###########################################################################
+io-audio
+wave
+waverec
+mix_ctl
+
+###########################################################################
+## uncomment for Graphics driver
+###########################################################################
+vsync
+egl-gears-lite
+io-display
+/etc/system/config/omap35xx.conf=omap35xx.conf
+/etc/system/config/display.conf={
+device \{
+       drivername=omap35xx
+        vid=0
+        did=0
+       modeopts=/etc/system/config/omap35xx.conf
+        display \{
+              xres=720
+              yres=400
+              refresh=60
+              pixel_format=rgb565
+        \}
+    \}
+}
+
+###########################################################################
+## uncomment for WIFI driver
+###########################################################################
+/root/wifi.sh={
+	## WIFI driver ##
+	io-pkt-v4 -d /proc/boot/devnp-mv8686.so dir=/root/io-pkt,verbose=1,poll=0 -p tcpip mclbytes=4096,stacksize=65000 random
+	ifconfig mv0 up
+	wpa_supplicant  -Dwext -imv0 -C /fsram/tmpfs &
+	wpa_cli -i mv0 -p /fsram/tmpfs
+}
+/root/io-pkt/helper_sd.bin=helper_sd.bin
+/root/io-pkt/sd8686.bin=sd8686.bin
+helper_sd.bin
+sd8686.bin
+/etc/wpa_supplicant.conf={
+}
+wpa_supplicant
+wpa_cli
+devb-ram 
+fdisk 
+mount 
+mkdosfs 
+random
+/mnt/sd = {}
+
+###########################################################################
+## uncomment for NETWORK driver
+###########################################################################
+ io-pkt-v4
+ nicinfo
+ ping
+ fs-nfs2
+ ifconfig
+ dhcp.client
+ qconn
+ #inetd
+ #ftpd
+ 
+###########################################################################
+## SGX support
+## Note:  the Composition_Manager patch should be install first
+###########################################################################
+libm.so.2
+devg-soft3d.so
+libsrv_um.so
+/usr/lib/graphics/devg/graphics.conf=graphics.conf
+/usr/lib/graphics/devg/libglslcompiler.so=libglslcompiler.so
+/usr/lib/graphics/devg/libIMGegl.so=libIMGegl.so
+/usr/lib/graphics/devg/libImgGLESv1_CM.so=libImgGLESv1_CM.so
+/usr/lib/graphics/devg/libImgGLESv2.so=libImgGLESv2.so
+/usr/lib/graphics/devg/libImgOpenVG.so=libImgOpenVG.so
+/usr/lib/graphics/devg/libpvr2d.so=libpvr2d.so
+/usr/lib/graphics/devg/libsrv_um.so=libsrv_um.so
+/usr/lib/graphics/devg/libWFDdevg.so=libWFDdevg.so
+/usr/lib/graphics/devg/pvrsrvd=pvrsrvd
+/usr/lib/graphics/devg/pvrsrvinit.so=pvrsrvinit.so
+/usr/lib/graphics/devg/wsegl-gf.so=wsegl-gf.so
+
+# the following binaries from the Composition_Manager patch  
+#/usr/lib/graphics/devg/libEGLdevg.so=libEGLdevg.so
+#/usr/lib/graphics/devg/libWFDdevg.so=libWFDdevg.so
+#libiow.so.1
+#libGLESv1_CM.so.1
+#libEGL.so.1
+#gles1-egl-gears
+
+###########################################################################
+## general commands
+###########################################################################
+resource_seed
+ls
+mv
+cat
+grep
+more
+mount
+ksh
+pdebug
+pipe
+pidin
+uname
+umount
+slogger
+sloginfo
+slay
+cp
+rm
+waitfor
+shutdown
+sleep
+chmod
+use
+ln
+route               
+stty                
+telnetd             
+devc-pty
+gpio
+op
+su
+passwd
+mkdir
+
+###########################################################################
+## END OF BUILD SCRIPT
+###########################################################################
+
+###########################################################################
+##
+## CONFIGURING ON-BOARD SUPPORTED HARDWARE:
+##
+##-------------------------------------------------------------------------
+##
+## SERIAL: OMAP UART
+##   example buildfile commands:
+##   devc-seromap -e -F -b115200 -c48000000/16 0x49020000^2,74
+##     waitfor /dev/ser1
+##     reopen /dev/ser1
+##
+##   required binaries:
+##     devc-seromap
+##
+##-------------------------------------------------------------------------
+## 
+## NAND FLASH: Micron NAND
+##    example buildfile commands:
+##    fs-etfs-omap3530_micron -r65536 -e -m /fs/etfs (First time only)
+##    fs-etfs-omap3530_micron -r65536 -m /fs/etfs
+##
+##    required binaries:
+##      fs-etfs-omap3530_micron
+##      etfsctl
+##
+##    To erase and format the NAND flash partition:
+##        etfsctl -d /dev/etfs2 -S -e
+##        etfsctl -d /dev/etfs2 -S -f -c
+##    You should slay and restart the driver,
+##    you should now see the mount point /fs/etfs/ which can be used to copy files to.
+##
+##-------------------------------------------------------------------------
+##
+## I2C:     Inter-Integrated Circuit Bus
+##   example buildfile commands:
+##     i2c-omap35xx
+##
+##   required binaries:
+##     i2c-omap35xx
+##
+##-------------------------------------------------------------------------
+##
+## AUDIO:   Audio codec on the TWL4030 (playback and capture support)
+##
+##   example buildfile commands:
+##     io-audio -domap35xx-twl4030
+##
+##   required libraries:
+##     deva-ctrl-omap35xx-twl4030.so
+##     libasound.so
+##     
+##   required binaries:
+##     resource_seed
+##     io-audio
+##
+##   NOTE: resouce_seed must be run before io-audio
+##
+##-------------------------------------------------------------------------
+##
+## USB EHCI:     USB EHCI HOST driver
+##   example buildfile commands:
+##     	io-usb -dehci-omap3 ioport=0x48064800,irq=77,verbose=5 
+##
+##   required binaries:
+##     	devu-ehci-omap3.so
+##		libusbdi.so
+##		io-usb
+##		usb
+##		
+###########################################################################
+
+###########################################################################
+##
+## INTERRUPT MAP
+##
+###########################################################################
+##
+## vector:   0
+## trigger:  level
+## device:   EMUINT (MPU emulation)
+##
+## vector:   1
+## trigger:  level
+## device:   COMMTX (MPU emulation)
+##
+## vector:   2
+## trigger:  level
+## device:   COMMRX (MPU emulation)
+##
+## vector:   3 
+## trigger:  level
+## device:   BENCH (MPU emulation)
+##
+## vector:   4
+## trigger:  level
+## device:   MCBSP2_ST_IRQ (Sidetone MCBSP2 overflow)
+##
+## vector:   5
+## trigger:  level
+## device:   MCBSP3_ST_IRQ (Sidetone MCBSP3 overflow)
+##
+## vector:   6
+## trigger:  level
+## device:   SSM_ABORT_IRQ (MPU subsystem secure state-machine abort)
+##
+## vector:   7
+## trigger:  level
+## device:   sys_nirq (External source - active low)
+##
+## vector:   8
+## trigger:  N/A
+## device:   Reserved
+##
+## vector:   9
+## trigger:  level
+## device:   SMX_DBG_IRQ (SMX error for debug)
+##
+## vector:   10
+## trigger:  level
+## device:   SMX_APP_IRQ SMX error for application
+##
+## vector:   11
+## trigger:  level
+## device:   PRCM_MPU_IRQ PRCM module IRQ
+##
+## vector:   12
+## trigger:  level
+## device:   SDMA_IRQ0 System DMA request 0
+##
+## vector:   13
+## trigger:  level
+## device:   SDMA_IRQ1 System DMA request 1
+##
+## vector:   14
+## trigger:  level
+## device:   SDMA_IRQ2 System DMA request 2
+##
+## vector:   15
+## trigger:  level
+## device:   SDMA_IRQ3 System DMA request 3
+##
+## vector:   16
+## trigger:  level
+## device:   MCBSP1_IRQ McBSP module 1 IRQ
+##
+## vector:   17
+## trigger:  level
+## device:   MCBSP2_IRQ McBSP module 2 IRQ
+##
+## vector:   18
+## trigger:  level
+## device:   SR1_IRQ SmartReflex 1
+##
+## vector:   19
+## trigger:  level
+## device:   SR2_IRQ SmartReflex 2
+##
+## vector:   20
+## trigger:  level
+## device:   GPMC_IRQ General-purpose memory controller module
+##
+## vector:   21
+## trigger:  level
+## device:   SGX_IRQ 2D/3D graphics module
+##
+## vector:   22
+## trigger:  level
+## device:   MCBSP3_IRQ McBSP module 3
+##
+## vector:   23
+## trigger:  level
+## device:   MCBSP4_IRQ McBSP module 4
+##
+## vector:   24
+## trigger:  level
+## device:   CAM_IRQ0 Camera interface request 0
+##
+## vector:   25
+## trigger:  level
+## device:   DSS_IRQ Display subsystem module
+##
+## vector:   26
+## trigger:  level
+## device:   MAIL_U0_MPU_IRQ Mailbox user 0 request
+##
+## vector:   27
+## trigger:  level
+## device:   MCBSP5_IRQ McBSP module 5
+##
+## vector:   28
+## trigger:  level
+## device:   IVA2_MMU_IRQ IVA2 MMU
+##
+## vector:   29
+## trigger:  level
+## device:   GPIO1_MPU_IRQ GPIO module 1
+##
+## vector:   30
+## trigger:  level
+## device:   GPIO2_MPU_IRQ GPIO module 2
+##
+## vector:   31
+## trigger:  level 
+## device:   GPIO3_MPU_IRQ GPIO module 3
+##
+## vector:   32
+## trigger:  level
+## device:   GPIO4_MPU_IRQ GPIO module 4
+##
+## vector:   33
+## trigger:  level
+## device:   GPIO5_MPU_IRQ GPIO module 5
+##
+## vector:   34
+## trigger:  level
+## device:   GPIO6_MPU_IRQ GPIO module 6
+##
+## vector:   35
+## trigger:  level
+## device:   USIM_IRQ USIM interrupt (HS devices only)
+##
+## vector:   36
+## trigger:  level
+## device:   WDT3_IRQ Watchdog timer module 3 overflow
+##
+## vector:   37
+## trigger:  level
+## device:   GPT1_IRQ General-purpose timer module 1 
+##
+## vector:   38
+## trigger:  level
+## device:   GPT2_IRQ General-purpose timer module 2
+##
+## vector:   39
+## trigger:  level
+## device:   GPT3_IRQ General-purpose timer module 3
+##
+## vector:   40
+## trigger:  level
+## device:   GPT4_IRQ General-purpose timer module 4
+##
+## vector:   41
+## trigger:  level
+## device:   GPT5_IRQ General-purpose timer module 5
+##
+## vector:   42
+## trigger:  level
+## device:   GPT6_IRQ General-purpose timer module 6
+##
+## vector:   43
+## trigger:  level
+## device:   GPT7_IRQ General-purpose timer module 7
+##
+## vector:   44
+## trigger:  level
+## device:   GPT8_IRQ General-purpose timer module 8
+##
+## vector:   45
+## trigger:  level
+## device:   GPT9_IRQ General-purpose timer module 9
+##
+## vector:   46
+## trigger:  level
+## device:   GPT10_IRQ General-purpose timer module 10
+##
+## vector:   47
+## trigger:  level
+## device:   GPT11_IRQ General-purpose timer module 11
+##
+## vector:   48
+## trigger:  level
+## device:   SPI4_IRQ McSPI module 4
+##
+## vector:   49
+## trigger:  level
+## device:   SHA1MD5_IRQ2 SHA-1/MD5 crypto-accelerator 2 (HS devices only)
+##
+## vector:   50
+## trigger:  N/A
+## device:   FPKA_IRQREADY_N PKA crypto-accelerator (HS devices only)
+##
+## vector:   51
+## trigger:  level
+## device:   SHA2MD5_IRQ SHA-2/MD5 crypto-accelerator 1 (HS devices only)
+##
+## vector:   52
+## trigger:  level
+## device:   RNG_IRQ RNG module (HS devices only)
+##
+## vector:   53
+## trigger:  level
+## device:   MG_IRQ MG function
+##
+## vector:   54
+## trigger:  level
+## device:   MCBSP4_IRQ_TX McBSP module 4 transmit
+##
+## vector:   55
+## trigger:  level
+## device:   MCBSP4_IRQ_RX McBSP module 4 receive
+##
+## vector:   56
+## trigger:  level
+## device:   I2C1_IRQ I2C module 1
+##
+## vector:   57
+## trigger:  level
+## device:   I2C2_IRQ I2C module 2
+##
+## vector:   58
+## trigger:  level
+## device:   HDQ_IRQ HDQ/One-wire
+##
+## vector:   59
+## trigger:  level
+## device:   McBSP1_IRQ_TX McBSP module 1 transmit
+##
+## vector:   60
+## trigger:  level
+## device:   McBSP1_IRQ_RX McBSP module 1 receive
+##
+## vector:   61
+## trigger:  level 
+## device:   I2C3_IRQ I2C module 3
+##
+## vector:   62
+## trigger:  level
+## device:   McBSP2_IRQ_TX McBSP module 2 transmit
+##
+## vector:   63
+## trigger:  level
+## device:   McBSP2_IRQ_RX McBSP module 2 receive
+##
+## vector:   64
+## trigger:  level
+## device:   FPKA_IRQRERROR_N PKA crypto-accelerator (HS devices only)
+##
+## vector:   65
+## trigger:  level
+## device:   SPI1_IRQ McSPI module 1
+##
+## vector:   66
+## trigger:  level
+## device:   SPI2_IRQ McSPI module 2
+##
+## vector:   67
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   68
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   69
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   70 
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   71
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   72
+## trigger:  level
+## device:   UART1_IRQ UART module 1
+##
+## vector:   73
+## trigger:  level
+## device:   UART2_IRQ UART module 2
+##
+## vector:   74
+## trigger:  level 
+## device:   UART3_IRQ UART module 3 (also infrared)
+##
+## vector:   75
+## trigger:  level
+## device:   PBIAS_IRQ Merged interrupt for PBIASlite1 and 2
+##
+## vector:   76
+## trigger:  level
+## device:   OHCI_IRQ OHCI controller HSUSB MP Host Interrupt
+##
+## vector:   77
+## trigger:  level
+## device:   EHCI_IRQ EHCI controller HSUSB MP Host Interrupt
+##
+## vector:   78
+## trigger:  level
+## device:   TLL_IRQ HSUSB MP TLL Interrupt
+##
+## vector:   79
+## trigger:  level
+## device:   PARTHASH_IRQ SHA2/MD5 crypto-accelerator 1 (HS devices only)
+##
+## vector:   80
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   81
+## trigger:  level
+## device:   MCBSP5_IRQ_TX McBSP module 5 transmit
+##
+## vector:   82
+## trigger:  level
+## device:   MCBSP5_IRQ_RX McBSP module 5 receive
+##
+## vector:   83
+## trigger:  level
+## device:   MMC1_IRQ MMC/SD module 1
+##
+## vector:   84
+## trigger:  level
+## device:   MS_IRQ MS-PRO module
+##
+## vector:   85
+## trigger:  level
+## device:   RESERVED
+##
+## vector:   86
+## trigger:  level
+## device:   MMC2_IRQ MMC/SD module 2
+##
+## vector:   87
+## trigger:  level
+## device:   MPU_ICR_IRQ MPU ICR
+##
+## vector:   88
+## trigger:  level
+## device:   RESERVED 
+##
+## vector:   89
+## trigger:  level
+## device:   MCBSP3_IRQ_TX McBSP module 3 transmit
+##
+## vector:   90
+## trigger:  level
+## device:   MCBSP3_IRQ_RX McBSP module 3 receive 
+##
+## vector:   91
+## trigger:  level
+## device:   SPI3_IRQ McSPI module 3
+##
+## vector:   92
+## trigger:  level
+## device:   HSUSB_MC_NINT High-Speed USB OTG controller 
+##
+## vector:   93
+## trigger:  level
+## device:   HSUSB_DMA_NINT High-Speed USB OTG DMA controller
+##
+## vector:   94
+## trigger:  level
+## device:   MMC3_IRQ MMC/SD module 3 
+##
+## vector:   95
+## trigger:  level
+## device:   GPT12_IRQ General-purpose timer module 12
+##
+###########################################################################
+##
+## GPIO Interrupts
+##
+## vector:	200
+## trigger:	user defined
+## device:	SMC Ethernet Controller
+##
+## vector:	201
+## trigger:	user defined
+## device:
+##
+## vector:	202
+## trigger:	user defined
+## device:
+##
+## vector:	203
+## trigger:	user defined
+## device:
+##
+## vector:	204
+## trigger:	user defined
+## device:
+##
+## vector:	205
+## trigger:	user defined
+## device:
+##
+## vector:	206
+## trigger:	user defined
+## device:
+##
+## vector:	207
+## trigger:	user defined
+## device:
+##
+## vector:	208
+## trigger:	user defined
+## device:
+##
+## vector:	209
+## trigger:	user defined
+## device:
+##
+## vector:	210
+## trigger:	user defined
+## device:
+##
+## vector:	211
+## trigger:	user defined
+## device:
+##
+## vector:	212
+## trigger:	user defined
+## device:
+##
+## vector:	213
+## trigger:	user defined
+## device:
+##
+## vector:	214
+## trigger:	rising edge
+## device:	IDE interface on OMAP35XX connector board
+##
+## vector:	215
+## trigger:	user defined
+## device:
+##
+## vector:	216
+## trigger:	user defined
+## device:
+##
+## vector:	217
+## trigger:	user defined
+## device:	
+##
+## vector:	218
+## trigger:	user defined
+## device:
+##
+## vector:	219
+## trigger:	user defined
+## device:
+##
+## vector:	220
+## trigger:	user defined
+## device:
+##
+## vector:	221
+## trigger:	user defined
+## device:
+##
+## vector:	222
+## trigger:	user defined
+## device:
+##
+## vector:	223
+## trigger:	user defined
+## device:
+##
+## vector:	224
+## trigger:	user defined
+## device:
+##
+## vector:	225
+## trigger:	user defined
+## device:
+##
+## vector:	226
+## trigger:	user defined
+## device:
+##
+## vector:	227
+## trigger:	user defined
+## device:
+##
+## vector:	228
+## trigger:	user defined
+## device:
+##
+## vector:	229
+## trigger:	user defined
+## device:
+##
+## vector:	230
+## trigger:	user defined
+## device:
+##
+## vector:	231
+## trigger:	user defined
+## device:
+##
+## vector:	232
+## trigger:	user defined
+## device:
+##
+## vector:	233
+## trigger:	user defined
+## device:
+##
+## vector:	234
+## trigger:	user defined
+## device:	
+##
+## vector:	235
+## trigger:	user defined
+## device:
+##
+## vector:	236
+## trigger:	user defined
+## device:
+##
+## vector:	237
+## trigger:	user defined
+## device:
+##
+## vector:	238
+## trigger:	user defined
+## device:
+##
+## vector:	239
+## trigger:	user defined
+## device:
+##
+## vector:	240
+## trigger:	user defined
+## device:
+##
+## vector:	241
+## trigger:	user defined
+## device:
+##
+## vector:	242
+## trigger:	user defined
+## device:
+##
+## vector:	243
+## trigger:	user defined
+## device:
+##
+## vector:	244
+## trigger:	user defined
+## device:
+##
+## vector:	245
+## trigger:	user defined
+## device:
+##
+## vector:	246
+## trigger:	user defined
+## device:
+##
+## vector:	247
+## trigger:	user defined
+## device:
+##
+## vector:	248
+## trigger:	user defined
+## device:
+##
+## vector:	249
+## trigger:	user defined
+## device:
+##
+## vector:	250
+## trigger:	user defined
+## device:
+##
+## vector:	251
+## trigger:	user defined
+## device:	
+##
+## vector:	252
+## trigger:	user defined
+## device:
+##
+## vector:	253
+## trigger:	user defined
+## device:
+##
+## vector:	254
+## trigger:	user defined
+## device:
+##
+## vector:	255
+## trigger:	user defined
+## device:
+##
+## vector:	256
+## trigger:	user defined
+## device:
+##
+## vector:	257
+## trigger:	user defined
+## device:
+##
+## vector:	258
+## trigger:	user defined
+## device:
+##
+## vector:	259
+## trigger:	user defined
+## device:
+##
+## vector:	260
+## trigger:	user defined
+## device:
+##
+## vector:	261
+## trigger:	user defined
+## device:
+##
+## vector:	262
+## trigger:	falling edge
+## device:	Compact Flash interface
+##
+## vector:	263
+## trigger:	user defined
+## device:
+##
+
+
+

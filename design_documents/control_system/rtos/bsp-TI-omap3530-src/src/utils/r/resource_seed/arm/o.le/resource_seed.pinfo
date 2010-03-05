@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/bin/
+INSTALLNAME=resource_seed
+NAME=resource_seed
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:30:32-GMT
+DESCRIPTION=Utility to seed system resources, such as DMA channels and IRQs, to the resource database manager

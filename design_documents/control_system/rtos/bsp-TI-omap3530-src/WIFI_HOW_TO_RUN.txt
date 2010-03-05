@@ -1,0 +1,143 @@
+HOW_TO_RUN.txt                June 1 2009 
+
+
+The contents of this file are meant to help you
+run the devnp-mv88w8686.so driver 
+
+Create IFS
+
+	The SDIO requires I2C for power control.
+
+   #######################################################################
+   ## I2C driver
+   ##  - Required for USB, AUDIO and MV8686 WIFI
+   #######################################################################
+   display_msg starting I2C driver...
+   i2c-omap35xx
+   waitfor /dev/i2c0
+
+	The WIFI tools require a temparary file space.
+	These lines were added to script block of 
+	the build file
+
+	#######################################################################
+	## WIFI start ram filesystem 
+	#######################################################################
+	devb-ram ram capacity=16384,nodinit,cache=0m
+	waitfor /dev/hd0
+	fdisk /dev/hd0 add -t 6
+	mount -e /dev/hd0
+	mkdosfs /dev/hd0t6
+	waitfor /dev/hd0t6
+	mount -t dos /dev/hd0t6 /fs
+
+	 
+	The driver also requires firmware.  
+
+	/root/io-pkt/helper_sd.bin=helper_sd.bin
+	/root/io-pkt/sd8686.bin=sd8686.bin
+
+	helper_sd.bin
+	sd8686.bin
+
+
+	Supplicant config file 
+
+	/etc/wpa_supplicant.conf={
+	}
+
+	Other supporting tools and libraries
+
+	o-pkt-v4
+	devnp-shim.so
+	ifconfig
+	nicinfo
+	netstat
+	ping
+	dhcp.client
+	libcrypto.so.1
+	libssl.so.1
+	wpa_supplicant
+	wpa_cli
+	wlanconfig
+	sysctl
+	libcrypto.so.1
+	libssl.so.1
+	ftpd
+	ftp
+
+	finally the mv8686 shared library.
+
+	devnp-mv88w8686.so
+
+Run 
+	If you wish to run two network stacks, one for wire and one for wireless, the prefix
+	option will be required i.e. prefix=/alt
+	
+	Note: The Random executable is required to do WPA mode ( random -p ).
+
+
+	Stack startup
+
+	io-pkt-v4 -d /proc/boot/devnp-mv88w8686.so dir=/root/io-pkt,verbose=0,poll=0 -p tcpip mclbytes=4096,stacksize=65000
+
+	ifconfig mv0 up
+
+	wpa_supplicant  -Dwext -imv0 -C /fs/tmpfs &
+
+	wpa_cli -i mv0 -p /fs/tmpfs
+
+	add_network
+	set_network 0 ssid "sid_name"
+	set_network 0 key_mgmt NONE
+	enable_network 0
+	quit
+	ifconfig mv0 x.x.x.x
+
+
+	Note:  You may see the error message below from wpa_supplicant, this is an acceptable error and can be ignored.
+		0x8B36ioctl[SIOCSIWPMKSA]: No such file or directyioctl_iwr() fd 3, ioctl
+
+A typical test run 
+
+	# io-pkt-v4 -d /root/io-pkt/devnp-mv88w8686.so dir=/root/io-pkt -p tcpip prefix=/alt,mclbytes=4096,stacksize=65000
+	# ifconfig mv0 up
+	# wpa_supplicant  -Dwext -imv0 -C /fs/tmpfs & 
+
+
+
+	# wpa_cli
+	wpa_cli v0.4.9
+	Copyright (c) 2004-2005, Jouni Malinen <jkmaline@cc.hut.fi> and contributors
+
+	This program is free software. You can distribute it and/or modify it
+	under the terms of the GNU General Public License version 2.
+
+	Alternatively, this software may be distributed under the terms of the
+	BSD license. See README and COPYING for more details.
+
+	Selected interface 'mv0'
+
+	Interactive mode
+
+	> add_network
+	0
+	> set_network 0 ssid "sid_name"
+	OK
+	> set_network 0 key_mgmt NONE
+	OK
+	> set_network 0 wep_key0 0123456789
+	OK
+	> enable_network 0
+	OK
+	> status
+	.
+	.
+	.
+	> q
+	#
+
+
+	# ifconfig mv0 192.168.0.2
+	# ping -n 192.168.0.1
+

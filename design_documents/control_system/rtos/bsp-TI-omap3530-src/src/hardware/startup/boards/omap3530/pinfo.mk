@@ -1,0 +1,3 @@
+define PINFO
+PINFO DESCRIPTION=TI OMAP3530 Cortex-A8 startup
+endef
