@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/usr/lib/
+INSTALLNAME=libipl.a
+NAME=libipl.a
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:28:35-GMT
+DESCRIPTION=ipl library

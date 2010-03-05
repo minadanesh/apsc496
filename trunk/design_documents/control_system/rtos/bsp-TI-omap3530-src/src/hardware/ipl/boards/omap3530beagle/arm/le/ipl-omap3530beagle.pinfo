@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/boot/sys/
+INSTALLNAME=ipl-omap3530beagle
+NAME=ipl-omap3530beagle
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:28:39-GMT
+DESCRIPTION=arm OMAP3530beagle ipl

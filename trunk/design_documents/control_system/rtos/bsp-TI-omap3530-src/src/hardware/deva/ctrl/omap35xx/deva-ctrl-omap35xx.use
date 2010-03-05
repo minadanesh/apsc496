@@ -1,0 +1,12 @@
+Sound driver DLL for the OMAP35xx
+
+Usage:
+io-audio -domap35xx-<variant>
+
+options:
+i2c_addr=xx               I2C slave address of Codec.
+mcbsp=[1..5]              McBSP to attach to.
+tx_voices=xx              Number of playback voices/channels.
+rx_voices=xx              Number of capture voices/channels.
+en_power_amp              Enable power amplifier.
+clk_mode=[0|1]            Set McBSP as clock master(1) or clk slave(0).

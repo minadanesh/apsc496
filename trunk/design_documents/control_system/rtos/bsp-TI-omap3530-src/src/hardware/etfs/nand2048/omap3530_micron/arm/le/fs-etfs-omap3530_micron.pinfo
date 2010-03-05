@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/sbin/
+INSTALLNAME=fs-etfs-omap3530_micron
+NAME=fs-etfs-omap3530_micron
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:28:25-GMT
+DESCRIPTION=ETFS Filesystem driver for the OMAP3530 Micron Nand

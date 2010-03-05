@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/bin/
+INSTALLNAME=pmic_tw4030_cfg
+NAME=pmic_tw4030_cfg
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:30:29-GMT
+DESCRIPTION=PMIC TW4030 POWER MANAGEMENT chip Configuration Utility

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<module name="ipl-omap3530beagle">
+  <classification>Driver</classification>
+  <description>
+    <short>Initial Program Loader for TI OMAP3530 Beagle board </short>
+    <abstract><![CDATA[
+			The ipl-omap3530beagle program is responsible for the first stage initialization of the TI OMAP3530 Beagle board, including initialization of the memory controller, and setting up a serial port for debug purposes. It then scans for a QNX IFS (Image File System) image, and copies that image to memory. Finally, it transfers control to the QNX startup-omap3530 module, which is located at the beginning of the IFS image.
+		]]></abstract>
+  </description>
+  <supports>
+    <availability>
+      <cpu isa="arm">
+        <byteOrder>le</byteOrder>
+      </cpu>
+    </availability>
+  </supports>
+  <contents>
+    <component id="omap3530beagle" generated="true">
+      <location basedir="arm/le">ipl-omap3530beagle</location>
+    </component>
+  </contents>
+  <requires>
+    <part rootMacro="LIBIPL_ROOT" build="true" location="hardware/ipl/lib"/>
+  </requires>
+</module>

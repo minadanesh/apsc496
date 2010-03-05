@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<module name="led">
+	<type>Element</type>
+	<classification>Runtime</classification>
+
+	<description>
+	        <short>Utility to control LED D440</short>
+	        <abstract>This utility controls LED D440 on the IGEPv2 board
+	        </abstract>
+	</description>
+
+	<supports> 
+		<availability>
+         <cpu isa="arm"><byteOrder>le</byteOrder></cpu>
+      </availability>
+	</supports>
+
+	<source available="false">
+		<location>.</location>
+	</source>
+
+     <GroupOwner>hw</GroupOwner>
+     <RuntimeComponent></RuntimeComponent>
+
+
+	<contents>
+		<component id="led" generated="true">
+			<location basedir="{cpu}/o{.:endian}"
+				runtime="true">led</location>
+		</component>	
+   </contents>
+	
+</module>

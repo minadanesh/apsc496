@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/sbin/
+INSTALLNAME=devc-tseromap
+NAME=devc-tseromap
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:28:05-GMT
+DESCRIPTION=Character device driver for the OMAP 1510/5910 UART

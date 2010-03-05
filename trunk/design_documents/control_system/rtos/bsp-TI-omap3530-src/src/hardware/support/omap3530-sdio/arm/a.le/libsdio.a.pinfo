@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/lib/
+INSTALLNAME=libsdio.a
+NAME=libsdio.a
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:30:18-GMT
+DESCRIPTION=SDIO library

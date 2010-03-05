@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/lib/dll/
+INSTALLNAME=deva-ctrl-omap35xx-tuner.so
+NAME=deva-ctrl-omap35xx-tuner.so
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:27:49-GMT
+DESCRIPTION=Driver for the OMAP35xx interfaced with TWL4030 audio system.

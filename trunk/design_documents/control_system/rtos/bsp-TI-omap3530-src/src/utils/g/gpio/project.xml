@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<module name="led">
+  <classification>Runtime</classification>
+  <description>
+    <short>Utility to control LED D440</short>
+    <abstract><![CDATA[This utility controls LED D440. 
+	        ]]></abstract>
+  </description>
+  <supports>
+    <availability>
+      <cpu isa="arm">
+        <byteOrder>le</byteOrder>
+      </cpu>
+    </availability>
+  </supports>
+  <contents>
+    <component id="led" generated="true">
+      <location basedir="arm/o.le">led</location>
+    </component>
+  </contents>
+</module>

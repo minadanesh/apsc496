@@ -1,0 +1,8 @@
+STATE=Experimental
+INSTALLDIR=armle/lib/dll/
+INSTALLNAME=devg-omap35xx.so
+NAME=devg-omap35xx.so
+USER=davychiu
+HOST=davy-computer
+DATE=2010/02/19-03:28:16-GMT
+DESCRIPTION=Graphics driver dll for OMAP 35xx LCD controller - loaded by io-display
