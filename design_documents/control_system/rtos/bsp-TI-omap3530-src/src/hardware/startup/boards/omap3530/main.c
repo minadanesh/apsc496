@@ -57,7 +57,7 @@ const struct debug_device debug_devices[] = {
 	},
 };
 
-void 
+void
 allocate_dsp_memory(paddr_t * resmem_addr, size_t * resmem_size, int count)
 {
 	int     i;
@@ -70,7 +70,7 @@ allocate_dsp_memory(paddr_t * resmem_addr, size_t * resmem_size, int count)
 	}
 }
 
-void 
+void
 allocate_dsplink_memory(paddr_t linkmem_addr, size_t linkmem_size)
 {
 	alloc_ram(linkmem_addr, linkmem_size, 1);
@@ -85,9 +85,9 @@ unsigned long calc_omap_dpll(void) {
     unsigned long long sys_clkspeed = 0, processor_speed = 0;
     unsigned sys_clkin_sel = 0, osc_clkspeed = 0;
     unsigned dpll = 0, sys_clkdiv = 0;
-    
+
     sys_clkin_sel = in32(OMAP35XX_PRM_CLKSEL) & 0x7;
-   
+
 	switch (sys_clkin_sel) {
 	case 0:
 		osc_clkspeed = 12000000;	/*12MHz*/
@@ -108,16 +108,16 @@ unsigned long calc_omap_dpll(void) {
 
     sys_clkdiv = (in32(OMAP35XX_PRM_CLKSRC_CTRL) >> 6) & 0x3;
     sys_clkspeed = osc_clkspeed / sys_clkdiv;
-   
+
     dpll = in32(OMAP35XX_CM_CLKSEL1_PLL_MPU);
 	mx = (in32(OMAP35XX_CM_CLKSEL2_PLL_MPU) & OMAP3530_MPU_DPLL_CLKOUT_DIV_MASK) >> OMAP3530_MPU_DPLL_CLKOUT_DIV_SHIFT;
-	
+
     dpll_mult = dpll & OMAP3530_MPU_DPLL_MULT_MASK;
     dpll_mult >>= OMAP3530_MPU_DPLL_MULT_SHIFT;		/* 11 bits */
 
 	dpll_div = dpll & OMAP3530_MPU_DPLL_DIV_MASK;
 	dpll_div >>= OMAP3530_MPU_DPLL_DIV_SHIFT;		/* 7 bits */
-	
+
 	mn_output = (sys_clkspeed * dpll_mult);
     mn_output = (mn_output / (dpll_div + 1));
 
@@ -177,7 +177,7 @@ main(int argc, char **argv, char **envv)
 	paddr_t linkmem_addr = 0;
 	size_t  linkmem_size = 0;
 	int     link_present = 0;
-	
+
 	pin_mux = 0;
 	mtp = 0;
 	teb = 0;
@@ -246,7 +246,7 @@ main(int argc, char **argv, char **envv)
 		cpu_freq = calc_omap_dpll();
 	}
 
-	/* 
+	/*
 	 * Remove RAM used by modules in the image
 	 */
 	alloc_ram(shdr->ram_paddr, shdr->ram_size, 1);

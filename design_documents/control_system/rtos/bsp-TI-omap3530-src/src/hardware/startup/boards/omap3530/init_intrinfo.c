@@ -41,6 +41,7 @@ static paddr_t omap3530_gpio1_base = OMAP3530_GPIO1_BASE;
 static paddr_t omap3530_gpio2_base = OMAP3530_GPIO2_BASE;
 static paddr_t omap3530_gpio3_base = OMAP3530_GPIO3_BASE;
 static paddr_t omap3530_gpio4_base = OMAP3530_GPIO4_BASE;
+static paddr_t omap3530_gpio5_base = OMAP3530_GPIO5_BASE;
 static paddr_t omap3530_gpio6_base = OMAP3530_GPIO6_BASE;
 static paddr_t omap3530_sdma_base = 0x48056000;
 
@@ -83,7 +84,7 @@ const static struct startup_intrinfo	gpio1intrs[] = {
 		0,							// CPU vector base
 		0,							// CPU vector stride
 		0,							// flags
-	
+
 		{ 0, 0, &interrupt_id_omap2420_gpio },
 		{ INTR_GENFLAG_LOAD_INTRMASK,	0, &interrupt_eoi_omap2420_gpio },
 		&interrupt_mask_omap2420_gpio,	// mask   callout
@@ -101,7 +102,7 @@ const static struct startup_intrinfo	gpio2intrs[] = {
 		0,							// CPU vector base
 		0,							// CPU vector stride
 		0,							// flags
-	
+
 		{ 0, 0, &interrupt_id_omap2420_gpio },
 		{ INTR_GENFLAG_LOAD_INTRMASK,	0, &interrupt_eoi_omap2420_gpio },
 		&interrupt_mask_omap2420_gpio,	// mask   callout
@@ -119,7 +120,7 @@ const static struct startup_intrinfo	gpio3intrs[] = {
 		0,							// CPU vector base
 		0,							// CPU vector stride
 		0,							// flags
-	
+
 		{ 0, 0, &interrupt_id_omap2420_gpio },
 		{ INTR_GENFLAG_LOAD_INTRMASK,	0, &interrupt_eoi_omap2420_gpio },
 		&interrupt_mask_omap2420_gpio,	// mask   callout
@@ -137,7 +138,7 @@ const static struct startup_intrinfo	gpio4intrs[] = {
 		0,							// CPU vector base
 		0,							// CPU vector stride
 		0,							// flags
-	
+
 		{ 0, 0, &interrupt_id_omap2420_gpio },
 		{ INTR_GENFLAG_LOAD_INTRMASK,	0, &interrupt_eoi_omap2420_gpio },
 		&interrupt_mask_omap2420_gpio,	// mask   callout
@@ -146,6 +147,25 @@ const static struct startup_intrinfo	gpio4intrs[] = {
 		&omap3530_gpio4_base,
 	},
 };
+
+const static struct startup_intrinfo	gpio5intrs[] = {
+	/* GPIO 5 interrupt */
+	{	128,						// vector base
+		32, 						// number of vectors
+		32, 						// cascade vector
+		0,							// CPU vector base
+		0,							// CPU vector stride
+		0,							// flags
+
+		{ 0, 0, &interrupt_id_omap2420_gpio },
+		{ INTR_GENFLAG_LOAD_INTRMASK,	0, &interrupt_eoi_omap2420_gpio },
+		&interrupt_mask_omap2420_gpio,	// mask   callout
+		&interrupt_unmask_omap2420_gpio,	// unmask callout
+		0,							// config callout
+		&omap3530_gpio5_base,
+	},
+};
+
 const static struct startup_intrinfo	gpio6intrs[] = {
 	/* GPIO 6 interrupt */
 	{	160,						// vector base
@@ -189,16 +209,17 @@ init_intrinfo()
 	out32(omap3530_intc_base + OMAP2420_INTC_MIR_SET2, 0xFFFFFFFF);
 	if(mtp){
 		if(teb){
-			out32(omap3530_gpio1_base + OMAP_GPIO_CLEAR_IRQENABLE1, 0xFFFFFFFF);
+			out32(omap3530_gpio1_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
 		}else{
-			out32(omap3530_gpio2_base + OMAP_GPIO_CLEAR_IRQENABLE1, 0xFFFFFFFF);
-			out32(omap3530_gpio3_base + OMAP_GPIO_CLEAR_IRQENABLE1, 0xFFFFFFFF);
+			out32(omap3530_gpio2_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
+			out32(omap3530_gpio3_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
 		}
-		out32(omap3530_gpio4_base + OMAP_GPIO_CLEAR_IRQENABLE1, 0xFFFFFFFF);
+		out32(omap3530_gpio4_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
+		out32(omap3530_gpio5_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
 	}else{
-		out32(omap3530_gpio6_base + OMAP_GPIO_CLEAR_IRQENABLE1, 0xFFFFFFFF);
+		out32(omap3530_gpio6_base + OMAP2420_GPIO_CLEARIRQENABLE1, 0xFFFFFFFF);
 	}
-	
+
 	/*
 	 * Set the priority to the highest and route to IRQ
 	 */
@@ -208,14 +229,16 @@ init_intrinfo()
 	if(mtp){
 		out32(omap3530_gpio4_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);
 		if(teb){
-			out32(omap3530_gpio1_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);	
+			out32(omap3530_gpio1_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);
 			//GPIO 15 V850 IPC_ACK falling edge -- vector 128+15 = 143
 			out32(OMAP3530_GPIO1_BASE + OMAP2420_GPIO_FALLINGDETECT, (1 << 15));
 			//GPIO 108 RDS tuner interrupt, falling edge -- vector 224+12 =236
 			//GPIO 107 V850 IPC_REQ, falling edge -- vector 224+11 =235
 			out32(OMAP3530_GPIO4_BASE + OMAP2420_GPIO_FALLINGDETECT, (0x3 << 11));
+			//out32(OMAP3530_GPIO5_BASE + OMAP2420_GPIO_RISINGDETECT, (1 << 3));
+			//out32(OMAP3530_GPIO5_BASE + OMAP2420_GPIO_FALLINGDETECT, (1 << 3));
 		}else{
-			out32(omap3530_gpio2_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);	
+			out32(omap3530_gpio2_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);
 			out32(omap3530_gpio3_base + OMAP_GPIO_IRQSTATUS1, 0xFFFFFFFF);
 			//GPIO 42 Ethernet IRQ, Active level high -- vector 160+10 =170
 			out32(OMAP3530_GPIO2_BASE + OMAP2420_GPIO_LEVELDETECT0, (1 << 10));
@@ -252,6 +275,7 @@ init_intrinfo()
 			add_interrupt_array(gpio3intrs, sizeof(gpio3intrs));
 		}
 		add_interrupt_array(gpio4intrs, sizeof(gpio4intrs));
+		//add_interrupt_array(gpio5intrs, sizeof(gpio5intrs));
 	}else{
 		add_interrupt_array(gpio6intrs, sizeof(gpio6intrs));
 	}
