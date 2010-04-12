@@ -72,6 +72,10 @@
 	waitfor /dev/ser1 4
 	reopen /dev/ser1
 
+	devc-seromap -u2 -e -F -b57600 -c48000000/16 0x4806C000^2,73
+	waitfor /dev/ser2 4
+	#reopen /dev/ser2
+
    	# Start some common servers
    	slogger &
    	pipe &
@@ -162,12 +166,16 @@
 	waitfor /dev/io-net/en0
 	dhcp.client
 	qconn
-	#inetd
+	inetd
 	#ftpd
 	##remote debug##
 	devc-pty
 	
-	mount -t flash /dev/hd0 /mnt/sd
+	###################
+	## SD mount
+	###################
+	display_msg Mounting SD card...
+	mount -t dos /dev/hd0t12 /sd
 	
 	#######################################################################
 	## SDIO WIFI driver
@@ -241,6 +249,9 @@ devn-asix.so
 devn-pegasus.so                       
 devn-rtl8150.so                       
 devnp-shim.so 
+devnp-ural.so 
+devnp-ral.so
+devnp-rum.so
 
 ###########################################################################
 ## uncomment for WIFI driver
@@ -334,12 +345,12 @@ sd8686.bin
 }
 wpa_supplicant
 wpa_cli
+wlanctl
 devb-ram 
 fdisk 
 mount 
 mkdosfs 
 random
-/mnt/sd = {}
 
 ###########################################################################
 ## uncomment for NETWORK driver
@@ -351,8 +362,27 @@ random
  ifconfig
  dhcp.client
  qconn
- #inetd
- #ftpd
+ inetd
+ ftpd
+ 
+ /etc/ftpusers = {
+ *		allow
+ }
+ /etc/passwd = {
+root:x:0:0:Superuser:/root:/bin/sh
+ftp:x:14:80:FTP User:/sd:/bin/sh
+ }
+ /etc/group = {
+root:x:0:root
+ftp:x:80:ftp
+ }
+ /etc/inetd.conf = {
+ftp        stream tcp nowait root  /proc/boot/ftpd           in.ftpd -l
+ }
+ 
+ ### sd mount ###
+ /sd/ = {
+ }
  
 ###########################################################################
 ## SGX support
@@ -418,6 +448,8 @@ op
 su
 passwd
 mkdir
+tracelogger
+qtalk
 
 ###########################################################################
 ## END OF BUILD SCRIPT

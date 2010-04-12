@@ -21,6 +21,8 @@
 
 
 #include "startup.h"
+#include <arm/omap2420.h>
+#include <arm/omap3530.h>
 
 #define CONTROL_DEVCONF0 0x48002274
 #define MMCSDIO1ADPCLKISEL  (1<<24)
@@ -66,6 +68,9 @@
 #define CONTROL_PADCONF_MMC2_CLK  0x48002158
 #define CONTROL_PADCONF_MMC2_DAT0 0x4800215c
 #define GPIO5_OE 0x49056034
+#define GPIO_IRQENABLE1  0x4905601c
+#define GPIO_IRQENABLE2  0x4905602c
+#define GPIO5_DEBOUNCEENABLE  0x49056050
 
 #define CONTROL_PADCONF_MCBSP2_FSX_CLKX	0x4800213C	/* MODE0 = MCBSP2 */
 #define CONTROL_PADCONF_MCBSP2_DR_DX	0x48002140	/* MODE0 = MCBSP2 */
@@ -157,10 +162,24 @@ init_pinmux(void)
 
 	/* ################GPIO5 SETUP################### */
 	/* MMC2 CLK */
-	pad = in32(CONTROL_PADCONF_MMC2_CLK) & 0x0000ffff;
-	out32(CONTROL_PADCONF_MMC2_CLK, pad | INPUTENABLE1 | MUXMODE1_MODE4);
+	//pad = in32(CONTROL_PADCONF_MMC2_CLK) & 0x0000ffff;
+	//out32(CONTROL_PADCONF_MMC2_CLK, pad | INPUTENABLE1 | PULLTYPE1_UP | PULLUDENABLE1 | MUXMODE1_MODE4);
+	/* MMC2 CMD */
+	//pad = in32(CONTROL_PADCONF_MMC2_CLK) & 0xffff0000;
+	//out32(CONTROL_PADCONF_MMC2_CLK, pad | INPUTENABLE0 | PULLTYPE0_UP | PULLUDENABLE0 | MUXMODE0_MODE4);
 
-	out32(GPIO5_OE, in32(GPIO5_OE) & ~(1<<2));
+	//disable output, which disables pull-down
+	//out32(GPIO5_OE, in32(GPIO5_OE) & ~(1<<4));
+
+	//enable debounce
+	//out32(GPIO5_DEBOUNCEENABLE, in32(GPIO5_DEBOUNCEENABLE) | (1 << 3));
+
+	/* GPIO IRQ */
+	//out32(GPIO_IRQENABLE1, in32(GPIO_IRQENABLE1)|(1 << 2)|(1 << 3));
+	//out32(GPIO_IRQENABLE2, in32(GPIO_IRQENABLE2)|(1<<3));
+	//out32(OMAP3530_GPIO5_BASE + OMAP2420_GPIO_LEVELDETECT1, (0 << 3));
+	//out32(OMAP3530_GPIO5_BASE + OMAP2420_GPIO_RISINGDETECT, (1 << 2)|(1 << 3));
+	//out32(OMAP3530_GPIO5_BASE + OMAP2420_GPIO_FALLINGDETECT, (1 << 2)|(1 << 3));
 
 	/***************************************/
 	/** Setup I2C1 Pins for I2C1 function **/
@@ -185,14 +204,14 @@ init_pinmux(void)
 	/***********************************/
 	/** Setup UART2 Pins to SAFE Mode **/
 	/***********************************/
-	out32(CONTROL_PADCONF_UART2_CTS_RTS, MUXMODE1_MODE7 | MUXMODE0_MODE7);
-	out32(CONTROL_PADCONF_UART2_TX_RX, MUXMODE1_MODE7 | MUXMODE0_MODE7);
+	out32(CONTROL_PADCONF_UART2_CTS_RTS, MUXMODE1_MODE0 | MUXMODE0_MODE0);
+	out32(CONTROL_PADCONF_UART2_TX_RX, MUXMODE1_MODE7 | MUXMODE0_MODE0);
 
 	/**********************************************/
 	/** Setup MCBSP3 Pins for UART2 (BT Control) **/
 	/**********************************************/
 	out32(CONTROL_PADCONF_MCBSP3_DX_DR, MUXMODE1_MODE1 | INPUTENABLE0 | PULLTYPE0_UP | PULLUDENABLE0 | MUXMODE0_MODE1);
-	out32(CONTROL_PADCONF_MCBSP3_CLKX_FSX, INPUTENABLE1 | PULLUDENABLE1 | MUXMODE1_MODE1 | MUXMODE0_MODE1);
+	out32(CONTROL_PADCONF_MCBSP3_CLKX_FSX, INPUTENABLE1 | PULLUDENABLE1 | MUXMODE1_MODE1 | MUXMODE0_MODE0);
 
 	/***************************************************/
 	/** Setup MCBSP1 Pins for MCBSP3 Audio (TUNER/BT) **/

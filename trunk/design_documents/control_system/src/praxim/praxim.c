@@ -40,18 +40,17 @@ uintptr_t gpio_ptr;
 
 int count, ENCM_count;
 int error;
-volatile uint32_t irqstatus, gpio_value, last_value;
+uint32_t irqstatus, gpio_value;
 
 // this is the ISR
 const struct sigevent *
 isr_handler (void *arg, int id)
 {
-	InterruptMask(GPIO5_IRQ, id);
+	//InterruptMask(GPIO5_IRQ, id);
 
     irqstatus = in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1);
-    gpio_value = in32(gpio_ptr + OMAP35XX_GPIO_DATAIN);
 
-    if ((irqstatus & (1 << 3))||(irqstatus & (1 << 4)))
+    if (irqstatus & (0b111111 << 2))
     	return (&event);
     else
     	return NULL;
@@ -63,10 +62,10 @@ int_thread (void *arg)
 {
 	int id;
 	enum encm_state {
-		encm_stateA=0b01,
+		encm_stateA=0b10,
 		encm_stateB=0b00,
-		encm_stateC=0b10,
-		encm_stateD=0b11} ENCM_curstate, ENCM_laststate;
+		encm_stateC=0b01,
+		encm_stateD=0b11} ENCM_curstate;
 
     // enable I/O privilege
     ThreadCtl (_NTO_TCTL_IO, 0);
@@ -83,7 +82,7 @@ int_thread (void *arg)
     }
 
     //clear ENCM,12,5 interrupts
-    out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (111111 << 3));
+    out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (0b111111 << 2));
 
     // now service the hardware when the ISR says to
     while (1)
@@ -93,47 +92,47 @@ int_thread (void *arg)
         	error = 1;
         }
 
-        irqstatus = in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1);
+        //irqstatus = in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1);
+        gpio_value = in32(gpio_ptr + OMAP35XX_GPIO_DATAIN);
 
         //ENCM
-        switch (ENCM_curstate = (gpio_value & (ENCM_A + ENCM_B))) {
-			case encm_stateA: 	if (ENCM_laststate == encm_stateD) ENCM_count++;
-								else ENCM_count--;
-								break;
-			case encm_stateB: 	if (ENCM_laststate == encm_stateA) ENCM_count++;
-								else ENCM_count--;
-								break;
-			case encm_stateC:  	if (ENCM_laststate == encm_stateB) ENCM_count++;
-								else ENCM_count--;
-								break;
-			case encm_stateD:  	if (ENCM_laststate == encm_stateC) ENCM_count++;
-								else ENCM_count--;
-								break;
-			default: 			break;
+        if (irqstatus & (ENCM_A + ENCM_B)) {
+			switch (ENCM_curstate = ((gpio_value & (ENCM_A + ENCM_B)) >> 2)) {
+				case encm_stateA:
+				case encm_stateC:	if (irqstatus & ENCM_A) ENCM_count++;
+									else ENCM_count--;
+									break;
+				case encm_stateB:
+				case encm_stateD:	if (irqstatus & ENCM_B) ENCM_count++;
+									else ENCM_count--;
+									break;
+				default: 			break;
+			}
         }
-        printf("curstate=%x\n",ENCM_curstate);
-        ENCM_laststate = ENCM_curstate;
+        //printf("curstate=%x\n",ENCM_curstate);
 
         //if (status & (1 << 3)) {
 			//printf("count=%i status=%x value=%i last_value=%i\n", count,status,value & (1 << 3),last_value);
 			//fflush(stdout);
-			if ((gpio_value & (1 << 3)) != last_value)
-				count++;
-			last_value = gpio_value & (1 << 3);
+			//if ((gpio_value & (1 << 3)) != last_value)
+			//	count++;
+			//last_value = gpio_value & (1 << 3);
 			//atomic_add(&count, 1);
 			// do the work
 
         //}
+        out32(omap_intc + 0x48, 0x3); //NEWIRQAGR
     	out32(omap_intc + 0xa8, 0x2);
-        out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (1 << 3));
+        out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (0b111111 << 2));
 
-        InterruptUnmask(GPIO5_IRQ, id);
+        //InterruptUnmask(GPIO5_IRQ, id);
     }
 }
 
 
 int main(int argc, char *argv[]) {
 	event.sigev_notify = SIGEV_INTR;
+	SIGEV_MAKE_CRITICAL(&event);
 
 	printf("Creating interrupt thread...\n");
 
@@ -142,8 +141,8 @@ int main(int argc, char *argv[]) {
     delay(10);
 
     while(!error) {
-    	printf("count=%i status=%x value=%i last_value=%i\n", ENCM_count,irqstatus,gpio_value & (1 << 3),last_value);
-    	fflush(stdout);
+    	printf("count=%i\n", ENCM_count);
+    	//fflush(stdout);
     	sleep(2);
     }
 

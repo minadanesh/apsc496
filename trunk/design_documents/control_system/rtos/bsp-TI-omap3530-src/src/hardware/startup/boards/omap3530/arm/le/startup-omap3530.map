@@ -471,7 +471,7 @@ LOAD C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc
 .plt
  *(.plt)
 
-.text           0x00000000     0xb9bc
+.text           0x00000000     0xb998
  *(.text .stub)
  .text          0x00000000        0x0 arm_board_ttb.o
  .text          0x00000000        0x0 armv7_cache.o
@@ -500,412 +500,412 @@ LOAD C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc
                 0x000005ec                mentor_ulpi_write
                 0x000009a8                mentor_ulpi_read
                 0x00000660                init_hwinfo
- .text          0x00000a18      0x2a4 init_intrinfo.o
+ .text          0x00000a18      0x2b0 init_intrinfo.o
                 0x00000a18                init_intrinfo
- .text          0x00000cbc      0x22c init_pinmux.o
-                0x00000cbc                init_pinmux
- .text          0x00000ee8      0x138 init_qtime_omap3530.o
-                0x00000f20                init_qtime_omap3530
- .text          0x00001020       0x38 init_raminfo.o
-                0x00001020                init_raminfo
- .text          0x00001058      0x564 main.o
-                0x000011b4                allocate_dsp_memory
-                0x00001240                main
-                0x00001154                allocate_dsplink_memory
-                0x00001058                calc_omap_dpll
- .text          0x000015bc        0x4 rtc_time.o
-                0x000015bc                rtc_time
- .text          0x000015c0      0x174 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(_main.o)
-                0x000015d0                __stackavail
-                0x000015c4                __get_errno_ptr
-                0x000015d8                _main
- .text          0x00001734      0x1b4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(add_interrupt.o)
-                0x00001734                add_interrupt
-                0x0000180c                add_interrupt_array
- .text          0x000018e8       0x6c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(alloc_qtime.o)
-                0x000018e8                alloc_qtime
- .text          0x00001954       0x3c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add.o)
-                0x00001954                as_add
- .text          0x00001990       0xd8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add64.o)
-                0x00001990                as_add64
- .text          0x00001a68        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(board_init.o)
-                0x00001a68                board_init
- .text          0x00001a6c      0x14c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_debug_8250.o)
-                0x00001ae8                display_char_8250
-                0x00001b2c                poll_key_8250
-                0x00001b70                break_detect_8250
- .text          0x00001bb8      0x150 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_interrupt_omap2420.o)
-                0x00001c54                interrupt_eoi_omap2420
-                0x00001c90                interrupt_mask_omap2420
-                0x00001c0c                interrupt_id_omap2420
-                0x00001ccc                interrupt_unmask_omap2420
- .text          0x00001d08      0x13c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_interrupt_omap2420_gpio.o)
-                0x00001e14                interrupt_unmask_omap2420_gpio
-                0x00001de4                interrupt_mask_omap2420_gpio
-                0x00001db4                interrupt_eoi_omap2420_gpio
-                0x00001d68                interrupt_id_omap2420_gpio
- .text          0x00001e44      0x4a0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callouts.o)
-                0x00001e44                output_callouts
-                0x00001eb0                callout_reloc_data
-                0x00002060                add_callout_array
-                0x00001ffc                add_callout
-                0x00001f70                callout_register_data
-                0x00002098                callout_output_one
- .text          0x000022e4      0x6ec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(common_options.o)
-                0x000022e4                set_debug
-                0x000024e4                select_debug
-                0x00002688                handle_common_option
- .text          0x000029d0       0x2c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_common_options.o)
-                0x000029d0                cpu_handle_common_option
- .text          0x000029fc       0x34 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_startup.o)
-                0x000029fc                cpu_startup
- .text          0x00002a30       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(debug.o)
-                0x00002a30                print_syspage
- .text          0x00002ac8      0x160 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(getopt.o)
-                0x00002ac8                getopt
- .text          0x00002c28      0x100 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(getsize.o)
-                0x00002c28                getsize
- .text          0x00002d28       0x34 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hw_rtc_none.o)
-                0x00002d28                rtc_time_none
- .text          0x00002d5c      0x3a8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hw_seromap.o)
-                0x00002f40                init_omap
-                0x00002d9c                put_omap
- .text          0x00003104       0xec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_add_device.o)
-                0x00003104                hwi_add_device
- .text          0x000031f0       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_add_location.o)
-                0x000031f0                hwi_add_location
- .text          0x00003228      0x1e4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_alloc.o)
-                0x000032a8                hwi_alloc_tag
-                0x0000324c                hwi_grow_tag
-                0x00003354                hwi_alloc_item
-                0x00003228                __hwi_find_string
-                0x0000323c                __hwi_base
- .text          0x0000340c       0x2c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_find_as.o)
-                0x0000340c                hwi_find_as
- .text          0x00003438       0x4c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwitag_add_location.o)
-                0x00003438                hwitag_add_location
- .text          0x00003484        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_cacheattr.o)
-                0x00003484                init_cacheattr
- .text          0x00003488      0x300 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_cpuinfo.o)
-                0x000036dc                init_cpuinfo
-                0x00003488                init_one_cpuinfo
- .text          0x00003788      0x230 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_mmu.o)
-                0x00003788                init_mmu
- .text          0x000039b8      0x7f0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_system_private.o)
-                0x000039e0                init_system_private
- .text          0x000041a8       0xb8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(jtag.o)
-                0x000041a8                jtag_store_syspage_addr
-                0x00004208                jtag_reserve_memory
-                0x000041f0                jtag_reserve_syspage_addr
- .text          0x00004260      0x428 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(kprintf.o)
-                0x000045d4                get_print_char
-                0x000045c4                set_print_char
-                0x000045e4                ksprintf
-                0x00004660                crash
-                0x0000463c                kprintf
- .text          0x00004688       0xe4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(load_ifs.o)
-                0x00004688                load_ifs
- .text          0x0000476c       0x10 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_callout_io.o)
-                0x0000476c                callout_io_map
- .text          0x0000477c        0xc C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_startup_io.o)
-                0x0000477c                startup_io_map
-                0x00004784                startup_io_unmap
- .text          0x00004788        0xc C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_startup_mem.o)
-                0x00004788                startup_memory_map
-                0x00004790                startup_memory_unmap
- .text          0x00004794       0xc8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memfuncs.o)
-                0x00004794                copy_memory
- .text          0x0000485c       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memmove.o)
-                0x0000485c                memmove
- .text          0x000048bc      0xa8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(print_sysp.o)
-                0x000048bc                print_syspage_sections
-                0x00004dd8                print_qtime
-                0x00005210                print_strings
-                0x00004ed0                print_meminfo
-                0x000052d8                print_typed_strings
-                0x00004e38                print_asinfo
-                0x00004b70                print_intrinfo
-                0x00004b40                print_smp
-                0x000050f4                print_hwinfo
-                0x00004c44                print_callout
-                0x00005074                print_syspage_enable
-                0x00004b1c                print_pminfo
-                0x00004aa0                print_mdriver
-                0x00004ccc                print_cacheattr
-                0x00004d48                print_cpuinfo
-                0x00004f78                print_system_private
- .text          0x00005348      0xb10 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(ram.o)
-                0x00005788                watch_add_ram
-                0x000057d4                add_sysram
-                0x00005724                avoid_ram
-                0x00005348                find_top_ram_aligned
-                0x00005e04                calloc_ram
-                0x00005cc4                add_ram
-                0x00005c30                reserve_ram
-                0x000059c0                alloc_ram
-                0x00005470                find_top_ram
-                0x00005488                find_ram
-                0x000055cc                ws_alloc
- .text          0x00005e58      0xac0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(restore_ifs.o)
-                0x00005fe8                rifs_restore_ifs2
-                0x00006150                rifs_save_elf32data
-                0x00006884                load_ifs2_nonbootable
-                0x0000631c                rifs_restore_ifs
-                0x00006728                rifs_load_ifs2
-                0x00005ef4                rifs_set_cksum
- .text          0x00006918       0x90 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(startnext.o)
-                0x00006918                startnext
- .text          0x000069a8       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(startup_info.o)
-                0x000069a8                find_startup_info
- .text          0x00006a04      0x278 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(strings.o)
-                0x00006a7c                del_typed_string
-                0x00006a04                find_typed_string
-                0x00006c00                add_typed_string
-                0x00006b2c                add_string
- .text          0x00006c7c       0xf4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(strtoul.o)
-                0x00006d6c                strtoul
-                0x00006c7c                strtopaddr
- .text          0x00006d70      0x4ec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(syspage_memory.o)
-                0x00006dc4                alloc_syspage_memory
-                0x00007064                grow_syspage_section
-                0x00006ffc                reloc_syspage_memory
-                0x00007198                init_syspage_memory
-                0x00006d70                write_syspage_memory
-                0x0000715c                set_syspage_section
- .text          0x0000725c        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(tweak_cmdline.o)
-                0x0000725c                tweak_cmdline
- .text          0x00007260       0x70 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(uncompress.o)
-                0x00007260                uncompress
- .text          0x000072d0       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(uncompress_ucl.o)
-                0x000072d0                uncompress_ucl
- .text          0x0000736c      0x508 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_cache.o)
-                0x00007588                arm_add_cache
-                0x0000736c                arm_v7_add_cache
- .text          0x00007874      0x118 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_cpuspeed.o)
-                0x00007874                arm_cpuspeed
- .text          0x0000798c      0x67c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_map.o)
-                0x00007d6c                arm_map
-                0x00007c30                arm_map_cpu
-                0x00007bc4                elf_vaddr_to_paddr
-                0x00007a1c                map_ptbl
-                0x00007a74                arm_pdmap
-                0x00007ad8                arm_scmap
-                0x00007b68                arm_scunmap
- .text          0x00008008       0xd4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_pte.o)
-                0x00008008                arm_pte_setup
- .text          0x000080dc       0x58 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_detect.o)
-                0x000080dc                armv_chip_detect
- .text          0x00008134        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_list.o)
- .text          0x00008134      0x2c4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add_containing.o)
-                0x00008134                as_add_containing
- .text          0x000083f8       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_default.o)
-                0x000083f8                as_default
- .text          0x00008430      0x138 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_find.o)
-                0x00008430                as_find
- .text          0x00008568      0x154 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_find_containing.o)
-                0x00008568                as_find_containing
- .text          0x000086bc       0x14 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_off2info.o)
-                0x000086bc                as_off2info
- .text          0x000086d0      0x210 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(chip_access.o)
-                0x0000887c                chip_access
-                0x00008714                chip_write8
-                0x00008828                chip_write32
-                0x000087e8                chip_read32
-                0x000086d0                chip_read8
-                0x00008758                chip_read16
-                0x000087a0                chip_write16
-                0x0000884c                chip_done
- .text          0x000088e0       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_startnext.o)
-                0x000088e0                cpu_startnext
- .text          0x0000896c      0x1e0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_syspage_memory.o)
-                0x00008970                cpu_alloc_syspage_memory
-                0x0000896c                cpu_write_syspage_memory
-                0x00008b3c                cpu_init_syspage_memory
- .text          0x00008b4c        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(crash_done.o)
-                0x00008b4c                crash_done
- .text          0x00008b50        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(dummy_print_char.o)
-                0x00008b50                dummy_print_char
- .text          0x00008b54      0x360 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(elf.o)
-                0x00008b54                is_elf
-                0x00008c14                load_elf32
- .text          0x00008eb4      0x268 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(elf_map.o)
-                0x00008eb4                elf_map
- .text          0x0000911c       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_default.o)
-                0x0000911c                hwi_default
- .text          0x0000917c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(mdriver_max.o)
- .text          0x0000917c      0x144 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memcpy.o)
-                0x0000917c                memcpy
- .text          0x000092c0       0x28 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(timer_ns2tick.o)
-                0x000092c0                timer_ns2tick
- .text          0x000092e8       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(timer_tick2ns.o)
-                0x000092e8                timer_tick2ns
- .text          0x00009380      0x1b0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(add_cache.o)
-                0x000094a8                add_cache
-                0x00009380                add_cache_ways
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1020.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1022.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1136.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1176.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1200.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_23xx.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_2400.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_2800.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_425.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_465.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_720.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_80200.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_920.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_922.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_925.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_926.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_a8.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_mp11.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa210b.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa210c.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa250a.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa250b.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa255.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa270.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_sa1100.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_sa1110.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_ixp2xxx.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v4wb.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v4wt.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wa.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wb.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wt.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v6mp.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v6wb.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v7wb.o)
- .text          0x00009530        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_xsc3.o)
- .text          0x00009530       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_1136.o)
-                0x00009530                armv_setup_1136
- .text          0x00009568        0x8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_1176.o)
-                0x00009568                armv_setup_1176
- .text          0x00009570        0x8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_a8.o)
-                0x00009570                armv_setup_a8
- .text          0x00009578       0xb0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_mp11.o)
-                0x00009578                armv_setup_mp11
- .text          0x00009628       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_v6.o)
-                0x00009628                armv_setup_v6
- .text          0x000096c0       0x24 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_xscale.o)
-                0x000096c0                armv_setup_xscale
- .text          0x000096e4       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_1020.o)
-                0x00009728                page_flush_deferred_1020
-                0x000096e4                page_flush_1020
- .text          0x00009738       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_1136.o)
-                0x00009778                page_flush_deferred_1136
-                0x00009738                page_flush_1136
- .text          0x0000978c       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_720.o)
-                0x000097ac                page_flush_deferred_720
-                0x0000978c                page_flush_720
- .text          0x000097c4       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_920.o)
-                0x000097c4                page_flush_920
-                0x00009808                page_flush_deferred_920
- .text          0x00009818       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_925.o)
-                0x00009818                page_flush_925
-                0x0000985c                page_flush_deferred_925
- .text          0x0000986c       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_a8.o)
-                0x0000986c                page_flush_a8
-                0x000098b8                page_flush_deferred_a8
- .text          0x000098c8       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_mp11.o)
-                0x000098c8                page_flush_mp11
-                0x0000990c                page_flush_deferred_mp11
- .text          0x0000991c       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_sa.o)
-                0x0000995c                page_flush_deferred_sa
-                0x0000991c                page_flush_sa
- .text          0x0000997c       0x64 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_xsc3.o)
-                0x000099d0                page_flush_deferred_xsc3
-                0x0000997c                page_flush_xsc3
- .text          0x000099e0       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_xscale.o)
-                0x000099e0                page_flush_xscale
-                0x00009a2c                page_flush_deferred_xscale
- .text          0x00009a3c       0x44 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_926.o)
-                0x00009a3c                power_926
- .text          0x00009a80       0x20 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_cp15_wfi.o)
-                0x00009a80                power_cp15_wfi
- .text          0x00009aa0       0xb8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_sa1100.o)
-                0x00009b08                power_sa1100
- .text          0x00009b58       0x24 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_xscale.o)
-                0x00009b58                power_xscale
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_1020.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_1136.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_720.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_920.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_925.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_926.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_a8.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_mp11.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_sa1100.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_xsc3.o)
- .text          0x00009b7c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_xscale.o)
- .text          0x00009b7c       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_1020.o)
-                0x00009b7c                cache_1020_i
-                0x00009bb8                cache_1020_d
- .text          0x00009c18       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_1136.o)
-                0x00009c18                cache_1136_i
-                0x00009c30                cache_1136_d
- .text          0x00009ca4       0x20 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_720.o)
-                0x00009ca4                cache_720
- .text          0x00009cc4       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_920.o)
-                0x00009cc4                cache_920_i
-                0x00009d00                cache_920_d
- .text          0x00009d60       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_925.o)
-                0x00009d60                cache_925_i
-                0x00009d9c                cache_925_d
- .text          0x00009dfc       0xd8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_926.o)
-                0x00009e48                cache_926_d
-                0x00009dfc                cache_926_i
- .text          0x00009ed4       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_a8.o)
-                0x00009f0c                cache_a8_d
-                0x00009ed4                cache_a8_i
- .text          0x00009f60       0x84 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_mp11.o)
-                0x00009f60                cache_mp11_i
-                0x00009f90                cache_mp11_d
- .text          0x00009fe4       0x7c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_sa.o)
-                0x00009fe4                cache_sa_i
-                0x00009ffc                cache_sa_d
- .text          0x0000a060       0xb4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_xsc3.o)
-                0x0000a060                cache_xsc3_i
-                0x0000a0a4                cache_xsc3_d
- .text          0x0000a114       0xa4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_xscale.o)
-                0x0000a154                cache_xscale_d
-                0x0000a114                cache_xscale_i
- .text          0x0000a1b8      0x8ac C:/QNX641/target/qnx6/armle/usr/lib\libucl.a(n2b_d.o)
-                0x0000a3f8                ucl_nrv2b_decompress_le16
-                0x0000a6e4                ucl_nrv2b_decompress_le32
-                0x0000a1b8                ucl_nrv2b_decompress_8
- .text          0x0000aa64      0x110 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_udivsi3.o)
-                0x0000aa64                __udivsi3
-                0x0000aa64                __aeabi_uidiv
-                0x0000ab5c                __aeabi_uidivmod
- .text          0x0000ab74        0xc C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_dvmd_nto.o)
-                0x0000ab74                __div0
- .text          0x0000ab80      0x554 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_udivdi3.o)
-                0x0000ab80                __udivdi3
- .text          0x0000b0d4      0x508 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_umoddi3.o)
-                0x0000b0d4                __umoddi3
- .text          0x0000b5dc       0xcc C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_umodsi3.o)
-                0x0000b5dc                __umodsi3
- .text          0x0000b6a8        0x0 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_clz.o)
- .text          0x0000b6a8      0x12c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_find_item.o)
-                0x0000b6a8                hwi_find_item
- .text          0x0000b7d4       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_off2tag.o)
-                0x0000b7d4                hwi_off2tag
- .text          0x0000b7f0       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_tag2off.o)
-                0x0000b7f0                hwi_tag2off
- .text          0x0000b80c       0x4c C:/QNX641/target/qnx6/armle/lib\libc.a(memcmp.o)
-                0x0000b80c                memcmp
- .text          0x0000b858       0x90 C:/QNX641/target/qnx6/armle/lib\libc.a(memset.o)
-                0x0000b858                memset
- .text          0x0000b8e8       0x44 C:/QNX641/target/qnx6/armle/lib\libc.a(strchr.o)
-                0x0000b8e8                strchr
- .text          0x0000b92c       0x4c C:/QNX641/target/qnx6/armle/lib\libc.a(strcmp.o)
-                0x0000b92c                strcmp
- .text          0x0000b978       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(strcpy.o)
-                0x0000b978                strcpy
- .text          0x0000b994       0x28 C:/QNX641/target/qnx6/armle/lib\libc.a(strlen.o)
-                0x0000b994                strlen
+ .text          0x00000cc8      0x1fc init_pinmux.o
+                0x00000cc8                init_pinmux
+ .text          0x00000ec4      0x138 init_qtime_omap3530.o
+                0x00000efc                init_qtime_omap3530
+ .text          0x00000ffc       0x38 init_raminfo.o
+                0x00000ffc                init_raminfo
+ .text          0x00001034      0x564 main.o
+                0x00001190                allocate_dsp_memory
+                0x0000121c                main
+                0x00001130                allocate_dsplink_memory
+                0x00001034                calc_omap_dpll
+ .text          0x00001598        0x4 rtc_time.o
+                0x00001598                rtc_time
+ .text          0x0000159c      0x174 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(_main.o)
+                0x000015ac                __stackavail
+                0x000015a0                __get_errno_ptr
+                0x000015b4                _main
+ .text          0x00001710      0x1b4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(add_interrupt.o)
+                0x00001710                add_interrupt
+                0x000017e8                add_interrupt_array
+ .text          0x000018c4       0x6c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(alloc_qtime.o)
+                0x000018c4                alloc_qtime
+ .text          0x00001930       0x3c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add.o)
+                0x00001930                as_add
+ .text          0x0000196c       0xd8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add64.o)
+                0x0000196c                as_add64
+ .text          0x00001a44        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(board_init.o)
+                0x00001a44                board_init
+ .text          0x00001a48      0x14c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_debug_8250.o)
+                0x00001ac4                display_char_8250
+                0x00001b08                poll_key_8250
+                0x00001b4c                break_detect_8250
+ .text          0x00001b94      0x150 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_interrupt_omap2420.o)
+                0x00001c30                interrupt_eoi_omap2420
+                0x00001c6c                interrupt_mask_omap2420
+                0x00001be8                interrupt_id_omap2420
+                0x00001ca8                interrupt_unmask_omap2420
+ .text          0x00001ce4      0x13c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_interrupt_omap2420_gpio.o)
+                0x00001df0                interrupt_unmask_omap2420_gpio
+                0x00001dc0                interrupt_mask_omap2420_gpio
+                0x00001d90                interrupt_eoi_omap2420_gpio
+                0x00001d44                interrupt_id_omap2420_gpio
+ .text          0x00001e20      0x4a0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callouts.o)
+                0x00001e20                output_callouts
+                0x00001e8c                callout_reloc_data
+                0x0000203c                add_callout_array
+                0x00001fd8                add_callout
+                0x00001f4c                callout_register_data
+                0x00002074                callout_output_one
+ .text          0x000022c0      0x6ec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(common_options.o)
+                0x000022c0                set_debug
+                0x000024c0                select_debug
+                0x00002664                handle_common_option
+ .text          0x000029ac       0x2c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_common_options.o)
+                0x000029ac                cpu_handle_common_option
+ .text          0x000029d8       0x34 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_startup.o)
+                0x000029d8                cpu_startup
+ .text          0x00002a0c       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(debug.o)
+                0x00002a0c                print_syspage
+ .text          0x00002aa4      0x160 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(getopt.o)
+                0x00002aa4                getopt
+ .text          0x00002c04      0x100 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(getsize.o)
+                0x00002c04                getsize
+ .text          0x00002d04       0x34 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hw_rtc_none.o)
+                0x00002d04                rtc_time_none
+ .text          0x00002d38      0x3a8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hw_seromap.o)
+                0x00002f1c                init_omap
+                0x00002d78                put_omap
+ .text          0x000030e0       0xec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_add_device.o)
+                0x000030e0                hwi_add_device
+ .text          0x000031cc       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_add_location.o)
+                0x000031cc                hwi_add_location
+ .text          0x00003204      0x1e4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_alloc.o)
+                0x00003284                hwi_alloc_tag
+                0x00003228                hwi_grow_tag
+                0x00003330                hwi_alloc_item
+                0x00003204                __hwi_find_string
+                0x00003218                __hwi_base
+ .text          0x000033e8       0x2c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_find_as.o)
+                0x000033e8                hwi_find_as
+ .text          0x00003414       0x4c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwitag_add_location.o)
+                0x00003414                hwitag_add_location
+ .text          0x00003460        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_cacheattr.o)
+                0x00003460                init_cacheattr
+ .text          0x00003464      0x300 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_cpuinfo.o)
+                0x000036b8                init_cpuinfo
+                0x00003464                init_one_cpuinfo
+ .text          0x00003764      0x230 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_mmu.o)
+                0x00003764                init_mmu
+ .text          0x00003994      0x7f0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(init_system_private.o)
+                0x000039bc                init_system_private
+ .text          0x00004184       0xb8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(jtag.o)
+                0x00004184                jtag_store_syspage_addr
+                0x000041e4                jtag_reserve_memory
+                0x000041cc                jtag_reserve_syspage_addr
+ .text          0x0000423c      0x428 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(kprintf.o)
+                0x000045b0                get_print_char
+                0x000045a0                set_print_char
+                0x000045c0                ksprintf
+                0x0000463c                crash
+                0x00004618                kprintf
+ .text          0x00004664       0xe4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(load_ifs.o)
+                0x00004664                load_ifs
+ .text          0x00004748       0x10 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_callout_io.o)
+                0x00004748                callout_io_map
+ .text          0x00004758        0xc C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_startup_io.o)
+                0x00004758                startup_io_map
+                0x00004760                startup_io_unmap
+ .text          0x00004764        0xc C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(map_startup_mem.o)
+                0x00004764                startup_memory_map
+                0x0000476c                startup_memory_unmap
+ .text          0x00004770       0xc8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memfuncs.o)
+                0x00004770                copy_memory
+ .text          0x00004838       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memmove.o)
+                0x00004838                memmove
+ .text          0x00004898      0xa8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(print_sysp.o)
+                0x00004898                print_syspage_sections
+                0x00004db4                print_qtime
+                0x000051ec                print_strings
+                0x00004eac                print_meminfo
+                0x000052b4                print_typed_strings
+                0x00004e14                print_asinfo
+                0x00004b4c                print_intrinfo
+                0x00004b1c                print_smp
+                0x000050d0                print_hwinfo
+                0x00004c20                print_callout
+                0x00005050                print_syspage_enable
+                0x00004af8                print_pminfo
+                0x00004a7c                print_mdriver
+                0x00004ca8                print_cacheattr
+                0x00004d24                print_cpuinfo
+                0x00004f54                print_system_private
+ .text          0x00005324      0xb10 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(ram.o)
+                0x00005764                watch_add_ram
+                0x000057b0                add_sysram
+                0x00005700                avoid_ram
+                0x00005324                find_top_ram_aligned
+                0x00005de0                calloc_ram
+                0x00005ca0                add_ram
+                0x00005c0c                reserve_ram
+                0x0000599c                alloc_ram
+                0x0000544c                find_top_ram
+                0x00005464                find_ram
+                0x000055a8                ws_alloc
+ .text          0x00005e34      0xac0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(restore_ifs.o)
+                0x00005fc4                rifs_restore_ifs2
+                0x0000612c                rifs_save_elf32data
+                0x00006860                load_ifs2_nonbootable
+                0x000062f8                rifs_restore_ifs
+                0x00006704                rifs_load_ifs2
+                0x00005ed0                rifs_set_cksum
+ .text          0x000068f4       0x90 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(startnext.o)
+                0x000068f4                startnext
+ .text          0x00006984       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(startup_info.o)
+                0x00006984                find_startup_info
+ .text          0x000069e0      0x278 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(strings.o)
+                0x00006a58                del_typed_string
+                0x000069e0                find_typed_string
+                0x00006bdc                add_typed_string
+                0x00006b08                add_string
+ .text          0x00006c58       0xf4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(strtoul.o)
+                0x00006d48                strtoul
+                0x00006c58                strtopaddr
+ .text          0x00006d4c      0x4ec C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(syspage_memory.o)
+                0x00006da0                alloc_syspage_memory
+                0x00007040                grow_syspage_section
+                0x00006fd8                reloc_syspage_memory
+                0x00007174                init_syspage_memory
+                0x00006d4c                write_syspage_memory
+                0x00007138                set_syspage_section
+ .text          0x00007238        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(tweak_cmdline.o)
+                0x00007238                tweak_cmdline
+ .text          0x0000723c       0x70 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(uncompress.o)
+                0x0000723c                uncompress
+ .text          0x000072ac       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(uncompress_ucl.o)
+                0x000072ac                uncompress_ucl
+ .text          0x00007348      0x508 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_cache.o)
+                0x00007564                arm_add_cache
+                0x00007348                arm_v7_add_cache
+ .text          0x00007850      0x118 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_cpuspeed.o)
+                0x00007850                arm_cpuspeed
+ .text          0x00007968      0x67c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_map.o)
+                0x00007d48                arm_map
+                0x00007c0c                arm_map_cpu
+                0x00007ba0                elf_vaddr_to_paddr
+                0x000079f8                map_ptbl
+                0x00007a50                arm_pdmap
+                0x00007ab4                arm_scmap
+                0x00007b44                arm_scunmap
+ .text          0x00007fe4       0xd4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(arm_pte.o)
+                0x00007fe4                arm_pte_setup
+ .text          0x000080b8       0x58 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_detect.o)
+                0x000080b8                armv_chip_detect
+ .text          0x00008110        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_list.o)
+ .text          0x00008110      0x2c4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_add_containing.o)
+                0x00008110                as_add_containing
+ .text          0x000083d4       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_default.o)
+                0x000083d4                as_default
+ .text          0x0000840c      0x138 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_find.o)
+                0x0000840c                as_find
+ .text          0x00008544      0x154 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_find_containing.o)
+                0x00008544                as_find_containing
+ .text          0x00008698       0x14 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(as_off2info.o)
+                0x00008698                as_off2info
+ .text          0x000086ac      0x210 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(chip_access.o)
+                0x00008858                chip_access
+                0x000086f0                chip_write8
+                0x00008804                chip_write32
+                0x000087c4                chip_read32
+                0x000086ac                chip_read8
+                0x00008734                chip_read16
+                0x0000877c                chip_write16
+                0x00008828                chip_done
+ .text          0x000088bc       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_startnext.o)
+                0x000088bc                cpu_startnext
+ .text          0x00008948      0x1e0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(cpu_syspage_memory.o)
+                0x0000894c                cpu_alloc_syspage_memory
+                0x00008948                cpu_write_syspage_memory
+                0x00008b18                cpu_init_syspage_memory
+ .text          0x00008b28        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(crash_done.o)
+                0x00008b28                crash_done
+ .text          0x00008b2c        0x4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(dummy_print_char.o)
+                0x00008b2c                dummy_print_char
+ .text          0x00008b30      0x360 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(elf.o)
+                0x00008b30                is_elf
+                0x00008bf0                load_elf32
+ .text          0x00008e90      0x268 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(elf_map.o)
+                0x00008e90                elf_map
+ .text          0x000090f8       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(hwi_default.o)
+                0x000090f8                hwi_default
+ .text          0x00009158        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(mdriver_max.o)
+ .text          0x00009158      0x144 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(memcpy.o)
+                0x00009158                memcpy
+ .text          0x0000929c       0x28 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(timer_ns2tick.o)
+                0x0000929c                timer_ns2tick
+ .text          0x000092c4       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(timer_tick2ns.o)
+                0x000092c4                timer_tick2ns
+ .text          0x0000935c      0x1b0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(add_cache.o)
+                0x00009484                add_cache
+                0x0000935c                add_cache_ways
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1020.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1022.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1136.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1176.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_1200.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_23xx.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_2400.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_2800.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_425.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_465.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_720.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_80200.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_920.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_922.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_925.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_926.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_a8.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_mp11.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa210b.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa210c.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa250a.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa250b.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa255.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_pxa270.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_sa1100.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_chip_sa1110.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_ixp2xxx.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v4wb.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v4wt.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wa.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wb.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v5wt.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v6mp.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v6wb.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_v7wb.o)
+ .text          0x0000950c        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_pte_xsc3.o)
+ .text          0x0000950c       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_1136.o)
+                0x0000950c                armv_setup_1136
+ .text          0x00009544        0x8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_1176.o)
+                0x00009544                armv_setup_1176
+ .text          0x0000954c        0x8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_a8.o)
+                0x0000954c                armv_setup_a8
+ .text          0x00009554       0xb0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_mp11.o)
+                0x00009554                armv_setup_mp11
+ .text          0x00009604       0x98 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_v6.o)
+                0x00009604                armv_setup_v6
+ .text          0x0000969c       0x24 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_setup_xscale.o)
+                0x0000969c                armv_setup_xscale
+ .text          0x000096c0       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_1020.o)
+                0x00009704                page_flush_deferred_1020
+                0x000096c0                page_flush_1020
+ .text          0x00009714       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_1136.o)
+                0x00009754                page_flush_deferred_1136
+                0x00009714                page_flush_1136
+ .text          0x00009768       0x38 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_720.o)
+                0x00009788                page_flush_deferred_720
+                0x00009768                page_flush_720
+ .text          0x000097a0       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_920.o)
+                0x000097a0                page_flush_920
+                0x000097e4                page_flush_deferred_920
+ .text          0x000097f4       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_925.o)
+                0x000097f4                page_flush_925
+                0x00009838                page_flush_deferred_925
+ .text          0x00009848       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_a8.o)
+                0x00009848                page_flush_a8
+                0x00009894                page_flush_deferred_a8
+ .text          0x000098a4       0x54 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_mp11.o)
+                0x000098a4                page_flush_mp11
+                0x000098e8                page_flush_deferred_mp11
+ .text          0x000098f8       0x60 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_sa.o)
+                0x00009938                page_flush_deferred_sa
+                0x000098f8                page_flush_sa
+ .text          0x00009958       0x64 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_xsc3.o)
+                0x000099ac                page_flush_deferred_xsc3
+                0x00009958                page_flush_xsc3
+ .text          0x000099bc       0x5c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_page_xscale.o)
+                0x000099bc                page_flush_xscale
+                0x00009a08                page_flush_deferred_xscale
+ .text          0x00009a18       0x44 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_926.o)
+                0x00009a18                power_926
+ .text          0x00009a5c       0x20 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_cp15_wfi.o)
+                0x00009a5c                power_cp15_wfi
+ .text          0x00009a7c       0xb8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_sa1100.o)
+                0x00009ae4                power_sa1100
+ .text          0x00009b34       0x24 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_power_xscale.o)
+                0x00009b34                power_xscale
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_1020.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_1136.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_720.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_920.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_925.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_926.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_a8.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_mp11.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_sa1100.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_xsc3.o)
+ .text          0x00009b58        0x0 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(armv_cache_xscale.o)
+ .text          0x00009b58       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_1020.o)
+                0x00009b58                cache_1020_i
+                0x00009b94                cache_1020_d
+ .text          0x00009bf4       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_1136.o)
+                0x00009bf4                cache_1136_i
+                0x00009c0c                cache_1136_d
+ .text          0x00009c80       0x20 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_720.o)
+                0x00009c80                cache_720
+ .text          0x00009ca0       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_920.o)
+                0x00009ca0                cache_920_i
+                0x00009cdc                cache_920_d
+ .text          0x00009d3c       0x9c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_925.o)
+                0x00009d3c                cache_925_i
+                0x00009d78                cache_925_d
+ .text          0x00009dd8       0xd8 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_926.o)
+                0x00009e24                cache_926_d
+                0x00009dd8                cache_926_i
+ .text          0x00009eb0       0x8c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_a8.o)
+                0x00009ee8                cache_a8_d
+                0x00009eb0                cache_a8_i
+ .text          0x00009f3c       0x84 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_mp11.o)
+                0x00009f3c                cache_mp11_i
+                0x00009f6c                cache_mp11_d
+ .text          0x00009fc0       0x7c C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_sa.o)
+                0x00009fc0                cache_sa_i
+                0x00009fd8                cache_sa_d
+ .text          0x0000a03c       0xb4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_xsc3.o)
+                0x0000a03c                cache_xsc3_i
+                0x0000a080                cache_xsc3_d
+ .text          0x0000a0f0       0xa4 C:/ide-4.6-workspace/bsp-TI-omap3530-src/src/hardware/startup/lib/arm/a.le\libstartup.a(callout_cache_xscale.o)
+                0x0000a130                cache_xscale_d
+                0x0000a0f0                cache_xscale_i
+ .text          0x0000a194      0x8ac C:/QNX641/target/qnx6/armle/usr/lib\libucl.a(n2b_d.o)
+                0x0000a3d4                ucl_nrv2b_decompress_le16
+                0x0000a6c0                ucl_nrv2b_decompress_le32
+                0x0000a194                ucl_nrv2b_decompress_8
+ .text          0x0000aa40      0x110 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_udivsi3.o)
+                0x0000aa40                __udivsi3
+                0x0000aa40                __aeabi_uidiv
+                0x0000ab38                __aeabi_uidivmod
+ .text          0x0000ab50        0xc C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_dvmd_nto.o)
+                0x0000ab50                __div0
+ .text          0x0000ab5c      0x554 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_udivdi3.o)
+                0x0000ab5c                __udivdi3
+ .text          0x0000b0b0      0x508 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_umoddi3.o)
+                0x0000b0b0                __umoddi3
+ .text          0x0000b5b8       0xcc C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_umodsi3.o)
+                0x0000b5b8                __umodsi3
+ .text          0x0000b684        0x0 C:/QNX641/host/win32/x86/usr/lib/gcc/arm-unknown-nto-qnx6.4.0/4.3.3//libgcc.a(_clz.o)
+ .text          0x0000b684      0x12c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_find_item.o)
+                0x0000b684                hwi_find_item
+ .text          0x0000b7b0       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_off2tag.o)
+                0x0000b7b0                hwi_off2tag
+ .text          0x0000b7cc       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(hwi_tag2off.o)
+                0x0000b7cc                hwi_tag2off
+ .text          0x0000b7e8       0x4c C:/QNX641/target/qnx6/armle/lib\libc.a(memcmp.o)
+                0x0000b7e8                memcmp
+ .text          0x0000b834       0x90 C:/QNX641/target/qnx6/armle/lib\libc.a(memset.o)
+                0x0000b834                memset
+ .text          0x0000b8c4       0x44 C:/QNX641/target/qnx6/armle/lib\libc.a(strchr.o)
+                0x0000b8c4                strchr
+ .text          0x0000b908       0x4c C:/QNX641/target/qnx6/armle/lib\libc.a(strcmp.o)
+                0x0000b908                strcmp
+ .text          0x0000b954       0x1c C:/QNX641/target/qnx6/armle/lib\libc.a(strcpy.o)
+                0x0000b954                strcpy
+ .text          0x0000b970       0x28 C:/QNX641/target/qnx6/armle/lib\libc.a(strlen.o)
+                0x0000b970                strlen
  *(.gnu.warning)
 
 .fini
