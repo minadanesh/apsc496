@@ -72,7 +72,7 @@
 	waitfor /dev/ser1 4
 	reopen /dev/ser1
 
-	devc-seromap -u2 -e -F -b57600 -c48000000/16 0x4806C000^2,73
+	devc-seromap -u2 -F -b57600 -c48000000/16 0x4806C000^2,73
 	waitfor /dev/ser2 4
 	#reopen /dev/ser2
 
@@ -175,7 +175,7 @@
 	## SD mount
 	###################
 	display_msg Mounting SD card...
-	mount -t dos /dev/hd0t12 /sd
+	mount -t dos /dev/hd0t4 /sd
 	
 	#######################################################################
 	## SDIO WIFI driver

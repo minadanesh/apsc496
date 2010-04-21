@@ -7,82 +7,49 @@
 #include <sys/neutrino.h>
 #include <sys/mman.h>
 #include <atomic.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <termios.h>
 
-#define GPIO5_IRQ 33
-
-#define OMAP3530_INTC_BASE			0x48200000
-#define OMAP35XX_GPIO1_BASE		    0x48310000
-#define OMAP35XX_GPIO2_BASE		    0x49050000
-#define OMAP35XX_GPIO3_BASE		    0x49052000
-#define OMAP35XX_GPIO4_BASE		    0x49054000
-#define OMAP35XX_GPIO5_BASE		    0x49056000
-#define OMAP35XX_GPIO6_BASE		    0x49058000
-#define OMAP35XX_GPIO_SIZE		    0x1000
-#define OMAP35XX_GPIO_IRQSTATUS1    0x018
-#define OMAP35XX_GPIO_IRQENABLE1    0x01c
-#define OMAP35XX_GPIO_OE		    0x034
-#define OMAP35XX_GPIO_DATAIN		0x038
-#define OMAP35XX_GPIO_DATAOUT		0x03C
-#define OMAP35XX_GPIO_SETDATAOUT	0x090
-#define OMAP35XX_GPIO_CLEARDATAOUT	0x094
-
-#define ENCM_A	(1 << 2)
-#define ENCM_B	(1 << 3)
-#define ENC12_A	(1 << 4)
-#define ENC12_B	(1 << 5)
-#define ENC5_A	(1 << 6)
-#define ENC5_B	(1 << 7)
+#define UART2_IRQ 73
 
 struct sigevent event;
 
-uintptr_t omap_intc;
-uintptr_t gpio_ptr;
-
-int count, ENCM_count;
+int encM, enc12, enc5;
 int error;
-uint32_t irqstatus, gpio_value;
+int fd;
+unsigned char readbuffer[8];
+long motorpos = 80001;
 
 // this is the ISR
 const struct sigevent *
 isr_handler (void *arg, int id)
 {
-	//InterruptMask(GPIO5_IRQ, id);
-
-    irqstatus = in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1);
-
-    if (irqstatus & (0b111111 << 2))
-    	return (&event);
-    else
-    	return NULL;
+	//if (tcischars(fd))
+		return (&event);
+	//else
+	//	return NULL;
 }
 
 // this thread is dedicated to handling and managing interrupts
 void *
 int_thread (void *arg)
 {
-	int id;
-	enum encm_state {
-		encm_stateA=0b10,
-		encm_stateB=0b00,
-		encm_stateC=0b01,
-		encm_stateD=0b11} ENCM_curstate;
+	int id, i;
+	int invalid_block = 0;
 
     // enable I/O privilege
     ThreadCtl (_NTO_TCTL_IO, 0);
 
     // initialize the hardware, etc.
-    omap_intc = mmap_device_io(OMAP35XX_GPIO_SIZE, OMAP3530_INTC_BASE);
-    gpio_ptr = mmap_device_io(OMAP35XX_GPIO_SIZE, OMAP35XX_GPIO5_BASE);
 
     // attach the ISR to IRQ 3
-    id = InterruptAttach (GPIO5_IRQ, isr_handler, NULL, 0, _NTO_INTR_FLAGS_TRK_MSK);
+    id = InterruptAttach (UART2_IRQ, isr_handler, NULL, 0, _NTO_INTR_FLAGS_TRK_MSK);
     if ( id == -1) {
     	perror("Cannot attach IRQ");
     	error = 1;
     }
-
-    //clear ENCM,12,5 interrupts
-    out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (0b111111 << 2));
 
     // now service the hardware when the ISR says to
     while (1)
@@ -91,62 +58,75 @@ int_thread (void *arg)
         	perror("Cannot wait for interrupt");
         	error = 1;
         }
-
-        //irqstatus = in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1);
-        gpio_value = in32(gpio_ptr + OMAP35XX_GPIO_DATAIN);
-
-        //ENCM
-        if (irqstatus & (ENCM_A + ENCM_B)) {
-			switch (ENCM_curstate = ((gpio_value & (ENCM_A + ENCM_B)) >> 2)) {
-				case encm_stateA:
-				case encm_stateC:	if (irqstatus & ENCM_A) ENCM_count++;
-									else ENCM_count--;
-									break;
-				case encm_stateB:
-				case encm_stateD:	if (irqstatus & ENCM_B) ENCM_count++;
-									else ENCM_count--;
-									break;
-				default: 			break;
+		//printf("test\n");
+		if (readcond(fd, readbuffer, sizeof(readbuffer), 8, 0, 0) != -1) {
+		//tcflush(fd, TCIFLUSH);
+			//check indices
+			for (i=0; i<8; i++) {
+				//printf("%i \n", (readbuffer[i] >> 5 ));
+				if ((readbuffer[i] >> 5 ) != i) {
+					invalid_block = 1;
+					tcflush(fd, TCIFLUSH);
+					break;
+				}
 			}
-        }
-        //printf("curstate=%x\n",ENCM_curstate);
+			if (!invalid_block) {
+				char byte0 = ((readbuffer[0] & 0b11111) << 3) | ((readbuffer[1] >> 2) & 0b111);
+				char byte1 = ((readbuffer[1] & 0b11) << 2) | ((readbuffer[2] >> 3) & 0b11);
+				char byte2 = ((readbuffer[2] & 0b111) << 5) | (readbuffer[3] & 0b11111);
+				char byte3 = (readbuffer[4] >> 1) & 0b1111;
+				char byte4 = ((readbuffer[4] & 0b1) << 6) | ((readbuffer[5] & 0b11111) << 2) | ((readbuffer[6] >> 2) & 0b11);
+				char byte5 = ((readbuffer[6] & 0b111) << 3) | ((readbuffer[7] >> 2) & 0b111);
+				enc12 = ((int)byte5 << 8) | byte4;
+				encM = ((int)byte3 << 8) | byte2;
+				enc5 = ((int)byte1 << 8) | byte0;
+				motorpos = (long)enc12 + (long)90000;
+				printf("enc12:%i encM:%i enc5:%i motorpos:%li \n", enc12, encM, enc5, motorpos);
+			}
+		}
 
-        //if (status & (1 << 3)) {
-			//printf("count=%i status=%x value=%i last_value=%i\n", count,status,value & (1 << 3),last_value);
-			//fflush(stdout);
-			//if ((gpio_value & (1 << 3)) != last_value)
-			//	count++;
-			//last_value = gpio_value & (1 << 3);
-			//atomic_add(&count, 1);
-			// do the work
-
-        //}
-        out32(omap_intc + 0x48, 0x3); //NEWIRQAGR
-    	out32(omap_intc + 0xa8, 0x2);
-        out32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1, in32(gpio_ptr + OMAP35XX_GPIO_IRQSTATUS1) | (0b111111 << 2));
-
-        //InterruptUnmask(GPIO5_IRQ, id);
     }
 }
 
 
 int main(int argc, char *argv[]) {
+	int i;
+	unsigned char index = 0;
+	//unsigned char bytetosend = 0;
+	unsigned char bytetosend[7];
+
 	event.sigev_notify = SIGEV_INTR;
 	SIGEV_MAKE_CRITICAL(&event);
 
-	printf("Creating interrupt thread...\n");
+	printf("starting...\n");
 
     // start up a thread that is dedicated to interrupt processing
+	tcflush(fd, TCIFLUSH);
     pthread_create (NULL, NULL, int_thread, NULL);
-    delay(10);
 
-    while(!error) {
-    	printf("count=%i\n", ENCM_count);
-    	//fflush(stdout);
-    	sleep(2);
-    }
+	fd = open ( "/dev/ser2", O_RDWR );
 
-    printf("error\n");
+	for (;;) {
+		index = 0;
+		//read(fd, readbuffer, sizeof(readbuffer));
+		//printf("%s", readbuffer);
 
+		for (i=0; i < 7; i++) {
+			//bytetosend = (index++ << 5) | ((motorpos >> 5*i) & (0b11111));
+			bytetosend[i] = (index++ << 5) | ((motorpos >> 5*i) & (0b11111));
+			//printf("%i: %08X \n",i, (motorpos >> 5*i) & 0b11111);
+			//write ( fd, (unsigned char[]){bytetosend} , 1 );
+			//delay(10);
+		//write ( fd, motorpos, 4 );
+		}
+		write ( fd, bytetosend , sizeof(bytetosend) );
+		//printf("%08X \n",motorpos);
+		//motorpos++;
+		//printf("\n");
+		//fflush(stdout);
+		//delay(200);
+	}
+
+	close (fd);
 	return EXIT_SUCCESS;
 }
