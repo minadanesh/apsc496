@@ -4,5 +4,5 @@ INSTALLNAME=omap3530.beagle.build
 NAME=beagle.build
 USER=davychiu
 HOST=davy-computer
-DATE=2010/04/11-08:44:33-GMT
+DATE=2010/04/21-08:01:47-GMT
 DESCRIPTION=Example build file for startup-omap3530

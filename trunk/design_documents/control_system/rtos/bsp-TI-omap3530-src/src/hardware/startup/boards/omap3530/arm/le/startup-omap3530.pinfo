@@ -4,5 +4,5 @@ INSTALLNAME=startup-omap3530
 NAME=startup-omap3530
 USER=davychiu
 HOST=davy-computer
-DATE=2010/04/11-08:44:35-GMT
+DATE=2010/04/21-08:01:48-GMT
 DESCRIPTION=TI OMAP3530 Cortex-A8 startup
