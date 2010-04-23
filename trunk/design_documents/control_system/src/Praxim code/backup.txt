@@ -1,0 +1,75 @@
+ISR(INT0_vect)
+{
+//    sendString("intA");
+
+ //   if (PIND0 == PIND1) encA--;
+ //   else encA++;
+	//encA++;
+	sendString("+");
+	//EIFR = 0x00;
+
+//	return;
+/*
+if ( !(PIND & (1<<PIND1)) ) { // Is Phase B low?
+if (PIND & (1<<PIND0)) { // Is Phase A high?
+count++; // count for right turn
+}
+else { // Phase A is low!
+count--; // count for left turn
+}
+}
+else { // Phase B is high!
+if ( !(PIND & (1<<PIND0)) ) { // Is Phase A low?
+count++; // count for right turn
+}
+else { // Phase A is high!
+count--; // count for left turn
+}
+}
+EICRB ^= (1<<ISC00); // trigger ISR next time for the other edge 
+
+sendString(PIND0);*/
+
+return;
+
+}
+
+ISR(INT1_vect)
+{
+
+//	PORTE = PORTE & 0b11101111;		//Led on (Bit4 = 0)
+//    _delay_ms(100);
+//	PORTE = PORTE | 0b00010000;		//Led off (Bit4 = 1)
+
+//    sendString("intB");
+
+   //if (PIND0==PIND1) encA++;
+   // else encA++;
+  //encA++;
+  sendString("-");
+  //EIFR = 0x00;
+
+ //	return;
+/*if ( PIND & (1<<PIND0) ) { // Is Phase A high?
+if ( (PIND & (1<<PIND1)) ) { // Is Phase B high?
+count++; // count for right turn
+}
+else { // Phase B is low!
+count--; // count for left turn
+}
+}
+else { // Phase A is low!
+if ( !(PIND & (1<<PIND1)) ) { // Is Phase B low?
+count++; // count for right turn
+}
+else { // Phase B is high!
+count--; // count for left turn
+}
+}
+EICRB ^= (1<<ISC01); // trigger ISR next time for the other edge 
+
+sendString(PIND1);*/
+
+return;
+
+}
